@@ -1,0 +1,38 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>UIFrame/TechDark/Styles.js</file>
+        <file>UIFrame/TechDark/WindTitle.qml</file>
+        <file>UIFrame/TechDark/BreathGlow.qml</file>
+        <file>UIFrame/TechDark/ContentA.qml</file>
+        <file>UIFrame/TechDark/ContentB.qml</file>
+        <file>UIFrame/TechDark/ContentL.qml</file>
+        <file>UIFrame/TechDark/ProgressGrillX.qml</file>
+        <file>UIFrame/TechDark/ProgressGrillY.qml</file>
+        <file>UIFrame/TechDark/ProgressCircle.qml</file>
+        <file>UIFrame/TechDark/RectCorner4.qml</file>
+        <file>UIFrame/TechDark/RectCorner0.qml</file>
+        <file>UIFrame/TechDark/ButtonSL.qml</file>
+        <file>UIFrame/TechDark/ButtonSM.qml</file>
+        <file>UIFrame/TechDark/ButtonSR.qml</file>
+        <file>UIFrame/TechDark/ButtonSD.qml</file>
+        <file>ChannelState.qml</file>
+        <file>ChannelStateLeft.qml</file>
+        <file>UIFrame/TechDark/ComboBoxNumber.qml</file>
+        <file>UIFrame/TechDark/ComboBoxSelect.qml</file>
+        <file>UIFrame/TechDark/LineEdit.qml</file>
+        <file>UIFrame/TechDark/RadioButtonR.qml</file>
+        <file>UIFrame/TechDark/CheckBoxR.qml</file>
+        <file>UIFrame/TechDark/CheckBoxD.qml</file>
+        <file>PageSysOverview.qml</file>
+        <file>Skin.js</file>
+        <file>PageSignalAnalyse.qml</file>
+        <file>LeftMenu.qml</file>
+        <file>PageK7Demo.qml</file>
+        <file>UIFrame/TechDark/ButtonN.qml</file>
+        <file>UIFrame/TechDark/MessageBox.qml</file>
+        <file>GpuInfo.qml</file>
+        <file>UIFrame/TechDark/ProgressSix.qml</file>
+        <file>UIFrame/TechDark/ProgressSixGrilX.qml</file>
+    </qresource>
+</RCC>

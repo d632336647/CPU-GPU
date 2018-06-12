@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Fonts/themify.ttf</file>
+        <file>Images/circle.gif</file>
+        <file>Images/wave.gif</file>
+        <file>Fonts/PhantasmAllCaps.ttf</file>
+    </qresource>
+</RCC>
