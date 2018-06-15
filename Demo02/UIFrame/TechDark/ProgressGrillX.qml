@@ -1,6 +1,6 @@
 import QtQuick 2.7
 import QtGraphicalEffects 1.0
-
+import "Styles.js" as FlatDark
 Item {
     id:root
     state: "HIDE"
@@ -13,13 +13,29 @@ Item {
     property int   cubeMargin: 2
     property real  percent: 0.6
     property bool  showGrow: true
+    Text {
+        id: valueShow
+        text: parseInt(percent*100) + "%"
+        color: "#c0c0c0"
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+        height: parent.height
+        anchors.left: pannel.right
+        font.family: FlatDark.fontFamily
+        width: 20
+        z:1
+    }
     Item{
         id:pannel
-        anchors.fill: parent
-        anchors.topMargin: iw
-        anchors.leftMargin: iw
-        anchors.bottomMargin: iw
-        anchors.rightMargin: iw
+//        anchors.fill: parent
+        width: parent.width-20
+        height: parent.height-iw
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+//        anchors.topMargin: iw
+//        anchors.leftMargin: iw
+//        anchors.bottomMargin: iw
+//        anchors.rightMargin: iw
         Rectangle
         {
             id:progressBg

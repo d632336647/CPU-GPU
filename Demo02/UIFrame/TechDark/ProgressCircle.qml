@@ -35,7 +35,7 @@ Item {
                 ctx.beginPath();
                 ctx.lineWidth = circleWidth
 //                ctx.strokeStyle = "#25303B";
-                ctx.strokeStyle = "#ff520d"
+                ctx.strokeStyle = "#404244"
                 ctx.arc(width/2, height/2,  r-iw,  0, 2*Math.PI);
                 //ctx.fill();  //填充
                 ctx.stroke()

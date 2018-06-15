@@ -4,5 +4,6 @@
         <file>Images/circle.gif</file>
         <file>Images/wave.gif</file>
         <file>Fonts/PhantasmAllCaps.ttf</file>
+        <file>Fonts/DISPLAY_FREE_TFB.ttf</file>
     </qresource>
 </RCC>

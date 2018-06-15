@@ -1,6 +1,6 @@
 import QtQuick 2.7
 import QtGraphicalEffects 1.0
-
+import "Styles.js" as FlatDark
 Item {
     id:root
     state: "HIDE"
@@ -13,11 +13,12 @@ Item {
     property real  percent: 0.67
     property real  calibration: 5       //百分之五
     property bool  showGrow: true
+    property bool  textShowGrow: true
     Text {
         id: showPercent
         text: parseInt(cricleMask.p * 100)
 //        anchors.centerIn: parent
-        font.family: "Phantasm"
+        font.family: FlatDark.fontNumber
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: -15
@@ -27,6 +28,19 @@ Item {
         color: "#c0c0c0"
         font.pixelSize:  parent.width * 0.3
         z:1
+    }
+    Glow {
+        id:textGrow
+        anchors.fill: showPercent
+        cached: true
+        fast: true
+        radius: 8
+        samples: 12
+        color: shadowColor
+        source: showPercent
+        spread: 0.2
+        opacity: 1
+        visible: textShowGrow
     }
 
     Item{
@@ -100,8 +114,6 @@ Item {
             spread: 0.2
             opacity: 0.8
             visible: showGrow
-
-
         }
 
         Rectangle{
@@ -115,8 +127,8 @@ Item {
                     var ctx = getContext('2d')
                     ctx.beginPath();
                     ctx.lineWidth = 1.5
-                    ctx.strokeStyle = shadowColor;
-                    ctx.fillStyle = shadowColor
+                    ctx.strokeStyle = "#00443c30";
+                    ctx.fillStyle = "#00443c30"
                     ctx.moveTo(width ,  0);
                     ctx.lineTo(width-0.86*height, 0.5*height);//0.86 = 1.72 / 2
                     ctx.lineTo(width, height);

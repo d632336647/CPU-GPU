@@ -10,7 +10,7 @@ Rectangle {
     color: "#1A1A1C"
     clip:true
 
-    //顶部左侧 CPU GPU RAM状态显示
+    //左侧 CPU GPU RAM状态显示
     //////////////////////////////////////////////////////////////////////////////
     Rectangle{
         id:cpuGpuRamBox
@@ -31,13 +31,9 @@ Rectangle {
         color: "black"
         //border.color: "#808080"
         //radius: 4
-        onCGpuProportionChanged: {
-            console.log("sdsa::")
-        }
         Text {
             id: moreButton
             font.family: "themify"
-
             text: qsTr("\ue6e6")
             font.pixelSize: 40
             color: "#1883D7"
@@ -92,6 +88,7 @@ Rectangle {
                     width: parent.width - 30
                     height: width
                     showGrow: false
+                    Component.onCompleted: {percent = GetSysInfo.getCpuPercent()/100.0}
                 }
                 Text{
                     id:cpuLable2
@@ -120,6 +117,9 @@ Rectangle {
             }
 
             Item{
+                id:gpu0
+                property real gpuPercent: 0
+                property real cachePercent: 0
                 width: 0.33*parent.width
                 height: width
                 Text{
@@ -142,6 +142,7 @@ Rectangle {
                     width: parent.width - 30
                     height: width
                     showGrow: false
+                    percent: gpu0.gpuPercent/100.0
                 }
                 Text{
                     id:gpuLable01
@@ -150,7 +151,7 @@ Rectangle {
                     anchors.leftMargin:  20
                     anchors.right: parent.right
                     height: 30
-                    text: "温度:75℃"
+                    text: "显存:"+gpu0.cachePercent/100.0+"%"
                     font.family: FlatDark.fontFamily
                     color:FlatDark.fontColor
                     font.pixelSize: FlatDark.mainFontSize
@@ -166,6 +167,7 @@ Rectangle {
                     height: 20
                     cubeMargin: 1
                     showGrow: false
+                    percent: gpu0.cachePercent/100.0
                 }
             }
             Item{
@@ -191,15 +193,16 @@ Rectangle {
                     width: parent.width - 30
                     height: width
                     showGrow: false
+                    Component.onCompleted: {percent =  GetSysInfo.getMemoryPercent()/100.0}
                 }
                 Text{
                     id:ramLable2
                     anchors.top: ramProcess.bottom
                     anchors.left: parent.left
-                    anchors.leftMargin:  12
+                    anchors.leftMargin:  8
                     anchors.right: parent.right
                     height: 30
-                    text: "总内存:16 GB"
+                    text: "物理：16GB"
                     font.family: FlatDark.fontFamily
                     color:FlatDark.fontColor
                     font.pixelSize: FlatDark.mainFontSize
@@ -211,10 +214,10 @@ Rectangle {
                     anchors.top: ramLable2.bottom
 
                     anchors.left: parent.left
-                    anchors.leftMargin: 12
+                    anchors.leftMargin: 8
                     anchors.right: parent.right
                     height: 20
-                    text: "虚拟内存:16 GB"
+                    text: "虚拟: 16GB"
                     font.family: FlatDark.fontFamily
                     color:FlatDark.fontColor
                     font.pixelSize: FlatDark.mainFontSize
@@ -258,6 +261,9 @@ Rectangle {
             width: parent.width
             height: cpuGpuRamBox.cGpuProportion2*root.height
             Item{
+                id:gpu1
+                property real gpuPercent: 0
+                property real cachePercent: 0
                 width: 0.5*parent.width
                 height: width
                 Text{
@@ -280,7 +286,8 @@ Rectangle {
                     width: parent.width - 30
                     height: width
                     showGrow: false
-
+                    percent: gpu1.gpuPercent/100.0
+//                    Component.onCompleted: { percent = gpuPercent }
                 }
                 Text{
                     id:gpuLable11
@@ -289,7 +296,7 @@ Rectangle {
                     anchors.leftMargin:  20
                     anchors.right: parent.right
                     height: 30
-                    text: "温度:75℃"
+                    text: "显存:" +gpu1.cachePercent+"%"
                     font.family: FlatDark.fontFamily
                     color:FlatDark.fontColor
                     font.pixelSize: FlatDark.mainFontSize+10
@@ -305,11 +312,22 @@ Rectangle {
                     height: 20
                     cubeMargin: 1
                     showGrow: false
+                    percent: gpu1.cachePercent/100.0
 
                 }
+//                onGpuPercentChanged: {
+//                    gpuProcess1.percent = gpuPercent/100.0
+//                }
+//                onCachePercentChanged: {
+//                    gpuLable11.text = "显存:" +cachePercent+"%"
+//                    gpuTemp1.percent = cachePercent/100.0
+//                }
             }
 
             Item{
+                id:gpu2
+                property real gpuPercent: 0
+                property real cachePercent: 0
                 width: 0.5*parent.width
                 height: width
                 Text{
@@ -332,6 +350,7 @@ Rectangle {
                     width: parent.width - 30
                     height: width
                     showGrow: false
+                    percent:gpu2.gpuPercent/100.0
                 }
                 Text{
                     id:gpuLable21
@@ -340,7 +359,7 @@ Rectangle {
                     anchors.leftMargin:  20
                     anchors.right: parent.right
                     height: 30
-                    text: "温度:75℃"
+                    text: "显存:"+gpu2.cachePercent+"%"
                     font.family: FlatDark.fontFamily
                     color:FlatDark.fontColor
                     font.pixelSize: FlatDark.mainFontSize+10
@@ -356,7 +375,9 @@ Rectangle {
                     height: 20
                     cubeMargin: 1
                     showGrow: false
+                    percent:gpu2.cachePercent/100.0
                 }
+
             }
         }
         Rectangle {
@@ -372,6 +393,7 @@ Rectangle {
                 width: parent.width-80
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: "#1883d7"
+
             }
         }
         Row{
@@ -382,6 +404,9 @@ Rectangle {
             width: parent.width
             height: cpuGpuRamBox.cGpuProportion2*root.heightt
             Item{
+                id:gpu3
+                property real gpuPercent: 0
+                property real cachePercent: 0
                 width: 0.5*parent.width
                 height: width
                 Text{
@@ -404,6 +429,7 @@ Rectangle {
                     width: parent.width - 30
                     height: width
                     showGrow: false
+                    percent: gpu3.gpuPercent/100.0
                 }
                 Text{
                     id:gpuLable31
@@ -412,7 +438,7 @@ Rectangle {
                     anchors.leftMargin:  20
                     anchors.right: parent.right
                     height: 30
-                    text: "温度:75℃"
+                    text: "显存:"+gpu3.cachePercent+"%"
                     font.family: FlatDark.fontFamily
                     color:FlatDark.fontColor
                     font.pixelSize: FlatDark.mainFontSize+10
@@ -428,10 +454,14 @@ Rectangle {
                     height: 20
                     cubeMargin: 1
                     showGrow: false
+                    percent: gpu3.cachePercent/100.0
                 }
             }
 
             Item{
+                id:gpu4
+                property real gpuPercent: 0
+                property real cachePercent: 0
                 width: 0.5*parent.width
                 height: width
                 Text{
@@ -454,6 +484,7 @@ Rectangle {
                     width: parent.width - 30
                     height: width
                     showGrow: false
+                    percent: gpu4.gpuPercent/100.0
                 }
                 Text{
                     id:gpuLable41
@@ -462,7 +493,7 @@ Rectangle {
                     anchors.leftMargin:  20
                     anchors.right: parent.right
                     height: 30
-                    text: "温度:75℃"
+                    text: "显存:"+gpu4.cachePercent+"%"
                     font.family: FlatDark.fontFamily
                     color:FlatDark.fontColor
                     font.pixelSize: FlatDark.mainFontSize+10
@@ -478,6 +509,7 @@ Rectangle {
                     height: 20
                     cubeMargin: 1
                     showGrow: false
+                    percent: gpu4.cachePercent/100.0
                 }
             }
         }
@@ -510,12 +542,24 @@ Rectangle {
                  PropertyAnimation { properties: "cGpuProportion"; duration: 1000; easing.type: Easing.OutExpo }//OutCubic
              }
         ]
+
+        Component.onCompleted: {
+            cpuGpuRamBox.state= "SHOW"
+            gpuProcess1.state = "SHOW"
+            gpuProcess2.state = "SHOW"
+            gpuProcess3.state = "SHOW"
+            gpuProcess4.state = "SHOW"
+            gpuTemp1.state    = "SHOW"
+            gpuTemp2.state    = "SHOW"
+            gpuTemp3.state    = "SHOW"
+            gpuTemp4.state    = "SHOW"
+        }
     }//END 底部右侧 CPU GPU RAM状态显示
 
 
 
 
-    //底部左侧 硬盘状态显示
+    //右侧顶部 硬盘状态显示
     //////////////////////////////////////////////////////////////////////////////
     Rectangle{
         id:systemStatusBox
@@ -525,8 +569,6 @@ Rectangle {
         anchors.leftMargin: 4
         anchors.right: parent.right
         anchors.rightMargin: 4
-//        anchors.bottom: cpuGpuRamBox.bottom
-//        anchors.bottomMargin: 4
         height:cpuGpuRamBox.cGpuProportion2*parent.height
         width: 0.7*parent.width
         color: "black"
@@ -537,7 +579,6 @@ Rectangle {
             width: parent.width
             height: 1
         }
-
         Rectangle{
             id:sysStatusTitle
             anchors.top: parent.top
@@ -635,7 +676,7 @@ Rectangle {
                             width: height
                             text: icon
                             font.family: "themify"
-                            color:textColor
+                            color:"#c0c0c0"
                             font.weight: Font.Bold
                             font.pixelSize: FlatDark.mainFontSize
                             verticalAlignment: Text.AlignVCenter
@@ -646,9 +687,9 @@ Rectangle {
                             anchors.left: iconSSD.right
                             anchors.right: parent.right
                             height: parent.height
-                            text: name
+                            text: "SSD "+name
                             font.family: FlatDark.fontFamily
-                            color:textColor
+                            color:"#c0c0c0"
                             font.pixelSize: FlatDark.mainFontSize
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
@@ -661,7 +702,7 @@ Rectangle {
                             anchors.fill: parent
                             text: size
                             font.family: FlatDark.fontFamily
-                            color:textColor
+                            color:"#c0c0c0"
                             font.pixelSize: FlatDark.mainFontSize
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
@@ -674,7 +715,7 @@ Rectangle {
                             anchors.fill: parent
                             text: temp
                             font.family: FlatDark.fontFamily
-                            color:textColor
+                            color:"#c0c0c0"
                             font.pixelSize: FlatDark.mainFontSize
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
@@ -685,13 +726,15 @@ Rectangle {
                         width: 0.5*parent.width
                         height: parent.height
 
+
                         ProgressGrillX{
+                            id:prigressDisk
                             anchors.fill: parent
                             iw: 6
                             cubeNumber: 50
                             cubeMargin: 1
                             showGrow: false
-                            percent:used
+                            percent:percents
                         }
                     }
                 }
@@ -711,38 +754,15 @@ Rectangle {
         }
         ListModel {
             id: sysModel
-            ListElement {
-                      icon: "\ue69f"
-                      textColor:"#c0c0c0"
-                      name: "SSD1 C:\\"
-                      size: "120GB"
-                      temp: "46℃"
-                      used: 0.89
-                  }
-                  ListElement {
-                      icon: "\ue69f"
-                      textColor:"#c0c0c0"
-                      name: "SSD1 D:\\"
-                      size: "120GB"
-                      temp: "46℃"
-                      used: 0.35
-                  }
-                  ListElement {
-                      icon: "\ue69f"
-                      textColor:"#c0c0c0"
-                      name: "SSD2 E:\\"
-                      size: "400GB"
-                      temp: "52℃"
-                      used: 0.55
-                  }
-                  ListElement {
-                      icon: "\ue69f"
-                      textColor:"#c0c0c0"
-                      name: "SSD2 F:\\"
-                      size: "100GB"
-                      temp: "52℃"
-                      used: 0.24
-                  }
+//            ListElement {
+//              icon: "\ue69f"
+//              textColor:"#c0c0c0"
+//              name: "SSD1 C:\\"
+//              size: "120GB"
+//              temp: "46℃"
+//              used: 0.89
+//            }
+
 
         }
         ScrollView{
@@ -767,7 +787,15 @@ Rectangle {
             }
         }
     }//END sysStateBox
+    //右侧底部
+    ChartPlot{
+        anchors.left: systemStatusBox.left
+        anchors.top: systemStatusBox.bottom
+        anchors.topMargin: 4
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
 
+    }
     function stateChange()
     {
         if(cpuGpuRamBox.state == "SHOW")
@@ -791,6 +819,84 @@ Rectangle {
             gpuTemp2.state    = "SHOW"
             gpuTemp3.state    = "SHOW"
             gpuTemp4.state    = "SHOW"
+        }
+    }
+    Connections{
+        target: GetSysInfo
+        onUpdateMes:{
+            cpuProcess.percent = GetSysInfo.getCpuPercent()/100.0
+            ramProcess.percent =  GetSysInfo.getMemoryPercent()/100.0
+
+            for(var current = 0;current<GetSysInfo.getDiskCount();current++)
+            {
+                    var model = sysModel.get(current);
+                    model.percents = GetSysInfo.getDiskPercent(current)/100.0
+            }
+
+            var gpuArray = [gpu1,gpu2,gpu3,gpu4]
+            var gpu0percent =0  //总的使用率变量
+            var gpu0cache   =0
+            for(current = 0;current< GetSysInfo.getGpuCount();current++)
+            {
+                console.log("GetGpuCount::"+GetSysInfo.getGpuCount)
+//                gpuArray[current].opacity = 1;
+                gpuArray[current].gpuPercent = GetSysInfo.getGpuPercent(current)
+                gpuArray[current].cachePercent = GetSysInfo.getGpuCache(current)
+
+                gpu0percent += gpuArray[current].gpuPercent
+                gpu0cache   += gpuArray[current].cachePercent
+            }
+            //计算平均
+            if(GetSysInfo.getGpuCount() !=0)
+            {
+            gpu0.gpuPercent = gpu0percent/GetSysInfo.getGpuCount()
+            gpu0.cachePercent = gpu0cache/GetSysInfo.getGpuCount()
+            }
+        }
+        //错误信息显示在底部 main.qml 里面定义的 rootBorder.stateError
+        onSendError:{
+            rootBorder.stateError = GetSysInfo.getGpuError()
+        }
+    }
+
+    //初始化时 获取总内存 虚拟内存 GPU数量等信息
+    Component.onCompleted: {
+        ramLable2.text = "物理：" +GetSysInfo.getMemoryP()+"GB"
+        ramLable3.text = "虚拟：" +GetSysInfo.getMemoryV()+"GB"
+
+        sysListView.currentIndex = 0
+        sysModel.clear()
+        for(var current = 0;current<GetSysInfo.getDiskCount();current++)
+        {
+            console.log("current:",current)
+            sysModel.append({"icon":"\ue69f","name":GetSysInfo.getDiskName(current),"size":GetSysInfo.getDiskAll(current),"temp":"50","percents":GetSysInfo.getDiskPercent(current)/100.0})
+        }
+
+        //GPU 确定核心数及获取使用率
+        var gpuArray = [gpu1,gpu2,gpu3,gpu4]
+        var gpu0percent =0
+        var gpu0cache   =0
+        //全部灰掉
+        gpu0.opacity = 0.1
+        for(current = 0;current< 4;current++)
+        {
+            gpuArray[current].opacity = 0.1
+        }
+        for(current = 0;current< GetSysInfo.getGpuCount();current++)
+        {
+
+            gpuArray[current].opacity = 1;
+            gpuArray[current].gpuPercent = GetSysInfo.getGpuPercent(current)
+            gpuArray[current].cachePercent = GetSysInfo.getGpuCache(current)
+            gpu0percent += gpuArray[current].gpuPercent
+            gpu0cache   += gpuArray[current].cachePercent
+        }
+        //计算平均
+        if(GetSysInfo.getGpuCount() !== 0)
+        {
+            gpu0.opacity = 1
+            gpu0.gpuPercent = gpu0percent/GetSysInfo.getGpuCount()
+            gpu0.cachePercent = gpu0cache/GetSysInfo.getGpuCount()
         }
     }
 }

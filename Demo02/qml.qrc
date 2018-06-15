@@ -34,5 +34,6 @@
         <file>GpuInfo.qml</file>
         <file>UIFrame/TechDark/ProgressSix.qml</file>
         <file>UIFrame/TechDark/ProgressSixGrilX.qml</file>
+        <file>ChartPlot.qml</file>
     </qresource>
 </RCC>

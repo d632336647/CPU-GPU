@@ -13,6 +13,7 @@ Item{
     id: rootBorder
     width: 1440+20
     height: 900+20
+    property var stateError: ""
 
     Rectangle{
         id:rootShadow
@@ -36,7 +37,7 @@ Item{
     }
 
     Rectangle{
-         id:root
+         id:roots
          anchors.centerIn: parent
          width: rootShadow.width - 2
          height: rootShadow.height - 2
@@ -129,6 +130,7 @@ Item{
              Loader {
                  id: windowLoader
                  anchors.fill: parent
+                 focus: true
                  onLoaded: {
                      focus = true
                  }
@@ -148,12 +150,24 @@ Item{
              anchors.right: parent.right
              height: 32
              color: FlatDark.SecondBgColor
+
              Rectangle{
                  anchors.left: parent.left;
                  anchors.top: parent.top
                  width: 1
                  height: parent.height
                  color: FlatDark.MainBgColor
+             }
+             Text {
+                 id: stateText
+                 anchors.left: parent.left
+                 anchors.leftMargin: 10
+                 text: rootBorder.stateError
+                 verticalAlignment: Text.AlignVCenter
+                 font.family: FlatDark.fontFamily
+                 font.pixelSize: FlatDark.mainFontSize
+                 height: parent.height
+                 color: "white"
              }
          }
 

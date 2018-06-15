@@ -1,4 +1,5 @@
 var fontFamily = "幼圆"
+var fontNumber = "DISPLAY FREE TFB"
 var fontColor = "#F0F0F0"
 var MainBgColor = "#000000"
 var SecondBgColor = "#2D2D2F"
