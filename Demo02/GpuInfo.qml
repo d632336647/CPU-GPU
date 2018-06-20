@@ -143,6 +143,7 @@ Rectangle {
                     height: width
                     showGrow: false
                     percent: gpu0.gpuPercent/100.0
+                    Component.onCompleted: {percent = gpu0.gpuPercent/GetSysInfo.getGpuCount()}
                 }
                 Text{
                     id:gpuLable01
@@ -193,7 +194,10 @@ Rectangle {
                     width: parent.width - 30
                     height: width
                     showGrow: false
-                    Component.onCompleted: {percent =  GetSysInfo.getMemoryPercent()/100.0}
+                    Component.onCompleted: {
+                        percent =  GetSysInfo.getMemoryPercent()/100.0
+                        valueChange.start()
+                    }
                 }
                 Text{
                     id:ramLable2
@@ -838,7 +842,7 @@ Rectangle {
             var gpu0cache   =0
             for(current = 0;current< GetSysInfo.getGpuCount();current++)
             {
-                console.log("GetGpuCount::"+GetSysInfo.getGpuCount)
+//                console.log("GetGpuCount::"+GetSysInfo.getGpuCount)
 //                gpuArray[current].opacity = 1;
                 gpuArray[current].gpuPercent = GetSysInfo.getGpuPercent(current)
                 gpuArray[current].cachePercent = GetSysInfo.getGpuCache(current)
@@ -847,7 +851,7 @@ Rectangle {
                 gpu0cache   += gpuArray[current].cachePercent
             }
             //计算平均
-            if(GetSysInfo.getGpuCount() !=0)
+            if(GetSysInfo.getGpuCount() !== 0)
             {
             gpu0.gpuPercent = gpu0percent/GetSysInfo.getGpuCount()
             gpu0.cachePercent = gpu0cache/GetSysInfo.getGpuCount()
@@ -868,7 +872,7 @@ Rectangle {
         sysModel.clear()
         for(var current = 0;current<GetSysInfo.getDiskCount();current++)
         {
-            console.log("current:",current)
+//            console.log("current:",current)
             sysModel.append({"icon":"\ue69f","name":GetSysInfo.getDiskName(current),"size":GetSysInfo.getDiskAll(current),"temp":"50","percents":GetSysInfo.getDiskPercent(current)/100.0})
         }
 

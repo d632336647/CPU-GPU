@@ -217,6 +217,7 @@ Makefile: ..\Demo02\MainFrame.pro ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\wi
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\resolve_config.prf \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\exclusive_builds_post.prf \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\default_post.prf \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\win32\console.prf \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\win32\rtti.prf \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\precompile_header.prf \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\warn_on.prf \
@@ -226,13 +227,11 @@ Makefile: ..\Demo02\MainFrame.pro ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\wi
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\win32\opengl.prf \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\uic.prf \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\file_copies.prf \
-		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\win32\windows.prf \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\testcase_targets.prf \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\exceptions.prf \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\yacc.prf \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\lex.prf \
 		..\Demo02\MainFrame.pro \
-		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\lib\qtmain.prl \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\lib\Qt5Charts.prl \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\lib\Qt5Widgets.prl \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\lib\Qt5Quick.prl \
@@ -385,6 +384,7 @@ Makefile: ..\Demo02\MainFrame.pro ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\wi
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\resolve_config.prf:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\exclusive_builds_post.prf:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\default_post.prf:
+..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\win32\console.prf:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\win32\rtti.prf:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\precompile_header.prf:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\warn_on.prf:
@@ -394,13 +394,11 @@ Makefile: ..\Demo02\MainFrame.pro ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\wi
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\win32\opengl.prf:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\uic.prf:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\file_copies.prf:
-..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\win32\windows.prf:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\testcase_targets.prf:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\exceptions.prf:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\yacc.prf:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\mkspecs\features\lex.prf:
 ..\Demo02\MainFrame.pro:
-..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\lib\qtmain.prl:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\lib\Qt5Charts.prl:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\lib\Qt5Widgets.prl:
 ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\lib\Qt5Quick.prl:

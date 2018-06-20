@@ -31,6 +31,9 @@ int main(int argc, char *argv[])
 
 //    viewer.setTitle(QStringLiteral("Flat Dark"));
     viewer.rootContext()->setContextProperty("GetSysInfo", new GetSysInfo);
+    GpuFFT1000 gpufft;
+//    gpufft.GetData();
+    viewer.rootContext()->setContextProperty("GpuFFT1000", &gpufft);
     viewer.setSource(QUrl("qrc:/main.qml"));    //将源代码设置额为url，装入QML组件并实例化它
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
     viewer.setColor(QColor("#00000000"));

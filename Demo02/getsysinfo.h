@@ -2,7 +2,6 @@
 #define GETSYSINFO_H
 #include <QObject>
 #include "windows.h"
-//#include <wbemidl.h>
 #include <QDebug>
 #include <QString>
 #include <QTimer>
@@ -10,7 +9,7 @@
 #include <QDir>
 #include <QList>
 
-#include <./LIB/NVML/nvml.h>
+#include <nvml.h>
 #include "gpufft1000.h"
 
 //全局结构体---磁盘
@@ -35,14 +34,16 @@ class GetSysInfo : public QObject
 public:
 
     explicit GetSysInfo(QObject *parent = 0);
-
+    ~GetSysInfo();
     //CPU
+//    QThread GpuCalculateThread;   //以后再放其他线程
     QTimer *timerCPU;       //定时器获取CPU信息
     void GetSysCpu() ;
     //GPU
     void GpuInitm();
     int GetGpuUsedTotal();
-//    GpuFFT1000 *gpufft;
+    GpuFFT1000 gpufft;
+    QList<int> GpuFFt;
     unsigned int gpu_count = 0;
     //Temp
     void GetCpuTemp();
@@ -50,6 +51,7 @@ public:
     bool GetSysMemory();
     //磁盘
     bool GetSysDisk() ;
+
 
     //CPU变量
     int cpuPercent;

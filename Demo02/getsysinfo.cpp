@@ -11,10 +11,15 @@ GetSysInfo::GetSysInfo(QObject *parent) : QObject(parent)
     timerCPU = new QTimer(this);
     connect(timerCPU, SIGNAL(timeout()), this, SLOT(GetINFO()));
     timerCPU->start(TIME);
-    GpuInitm();
+
+//    gpufft.GetData();
+//    connect(this,&GetSysInfo::--,gpufft,&GpuFFT1000::GetData);
 //    getGpuFFT(gpu_count);
 }
-
+GetSysInfo::~GetSysInfo()
+{
+    deleteLater();
+}
 
 //计算获取CPU使用率
 void GetSysInfo::GetSysCpu()
@@ -89,6 +94,7 @@ void GetSysInfo::GetINFO()
     {
         emit sendError();
     }
+    emit sendError();
 }
 //GPU Init
 void GetSysInfo::GpuInitm()
@@ -143,17 +149,17 @@ int GetSysInfo::GetGpuUsedTotal()
         result = nvmlDeviceGetUtilizationRates(device, &utilization);
         if (NVML_SUCCESS != result)
         {
-            qDebug()<<"device " <<QString::number(1) <<" nvmlDeviceGetUtilizationRates Failed : " <<QString::number(result) << "-" << nvmlErrorString(result);
+//            qDebug()<<"device " <<QString::number(1) <<" nvmlDeviceGetUtilizationRates Failed : " <<QString::number(result) << "-" << nvmlErrorString(result);
             return 1;
         }
         else
         {
             //printf("----- 使用率 ----- \n");
-            qDebug()<<"GPU" <<QString::number(i) << "使用率："  <<QString::number(utilization.gpu);
+//            qDebug()<<"GPU" <<QString::number(i) << "使用率："  <<QString::number(utilization.gpu);
             GPUInfoStr.append(findoutGPUinfoStr);
             gpuPercent = QString::number(utilization.gpu);
 
-            qDebug()<<"显存使用率：" <<QString::number(utilization.memory);
+//            qDebug()<<"显存使用率：" <<QString::number(utilization.memory);
             GPUInfoStr.append(findoutGPUinfoStr);
             gpuCaChe = QString::number(utilization.memory);
 
@@ -182,22 +188,10 @@ int GetSysInfo::GetGpuUsedTotal()
 //    }
 //    return 1;
 }
+//计算GPU FFT
 void GetSysInfo::getGpuFFT(int count)
 {
-    GpuFFT1000 *gpufft;
-    QList<int> GpuFFt;
-    int temp;
-    gpufft = new GpuFFT1000;
-    int index = 0;
-    for(index=0;index<count;index++)
-    {
-        temp = gpufft->GetGpuFFT(index);
-        GpuFFt.append(temp);
-    }
-    foreach (int i, GpuFFt)
-    {
-        qDebug()<<"GpuFFt"<<i;
-    }
+
 }
 
 //获取内存使用率 物理内存 虚拟内存分页文件大小
@@ -283,7 +277,7 @@ QString GetSysInfo::getMemoryV()
 //GPUqml接口
 int GetSysInfo::getGpuCount()
 {
-    qDebug()<<GpuInfoList.length();
+//    qDebug()<<GpuInfoList.length();
     return GpuInfoList.length();
 
 }

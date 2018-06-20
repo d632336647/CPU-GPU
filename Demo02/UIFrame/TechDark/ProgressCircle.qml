@@ -3,15 +3,19 @@ import QtGraphicalEffects 1.0
 
 Item {
     id:root
-    state: "HIDE"
+//    state: "HIDE"
     clip: true
     property color bgColor: "black"
     property color borderColor: "#A00AFFFC"
     property color shadowColor: "#1883D7"
     property int   iw: 18
     property int   circleWidth: 8
-    property real  percent: 0.65
+    property real  percent: 0.0
     property bool  showGrow: true
+    property alias valueChange: valueChange
+    onPercentChanged: {
+        valueChange.start()
+    }
     Text {
         id: showPercent
         text: parseInt(cricleMask.p * 100)
@@ -61,6 +65,14 @@ Item {
             onDChanged:
             {
                 requestPaint()
+            }
+            NumberAnimation {
+                id:valueChange
+                target: cricleMask
+                to:(2*Math.PI) * percent
+                property: "d"
+                duration: 300
+                easing.type: Easing.Linear
             }
         }
 
@@ -139,48 +151,45 @@ Item {
         }
     }
 
-    //过渡动画
-    states: [
-        State {
-            name: "HIDE"
-            PropertyChanges { target: cricleMask; d: 0}
-            PropertyChanges { target: root; opacity: 0}
-            onCompleted:{
-                //root.visible = false
-            }
-        },
-        State {
-            name: "SHOW"
-            PropertyChanges { target: cricleMask; d: (2*Math.PI) * percent}
-            PropertyChanges { target: root; opacity: 1}
-            onCompleted: {
-            }
-        }
-    ]
+//    //过渡动画
+//    states: [
+//        State {
+//            name: "HIDE"
+//            PropertyChanges { target: cricleMask; d: 0}
+//            PropertyChanges { target: root; opacity: 0}
+//            onCompleted:{
+//                //root.visible = false
+//            }
+//        },
+//        State {
+//            name: "SHOW"
+//            PropertyChanges { target: cricleMask; d: (2*Math.PI) * percent}
+//            PropertyChanges { target: root; opacity: 1}
+//            onCompleted: {
+//            }
+//        }
+//    ]
 
-    transitions: [
-         Transition {
-             from: "SHOW"
-             to: "HIDE"
-             PropertyAnimation { properties: "d,opacity"; duration: 1500; easing.type: Easing.OutCubic }
-         },
-         Transition {
-             from: "HIDE"
-             to: "SHOW"
-             PropertyAnimation { properties: "d,opacity"; duration: 1500; easing.type: Easing.OutCubic }
-         }
-    ]
-
-    onStateChanged:
-    {
-        //pannel.state = state
-    }
+//    transitions: [
+//         Transition {
+//             from: "SHOW"
+//             to: "HIDE"
+//             PropertyAnimation { properties: "d,opacity"; duration: 1500; easing.type: Easing.OutCubic }
+//         },
+//         Transition {
+//             from: "HIDE"
+//             to: "SHOW"
+//             PropertyAnimation { properties: "d,opacity"; duration: 1500; easing.type: Easing.OutCubic }
+//         }
+//    ]
 
 
-    Component.onCompleted:
-    {
-        root.state = "SHOW"
-
+//    Component.onCompleted:
+//    {
+//        root.state = "SHOW"
+//    }
+    Component.onCompleted: {
+        valueChange.start()
     }
 
 }
