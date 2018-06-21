@@ -3,8 +3,24 @@
 GpuFFT1000::GpuFFT1000(QObject *parent) : QObject(parent)
 {
     GpuInitm();
-}
 
+    QTimer *m_timer;
+
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(autoKeepSampleTimeOut()));
+    m_timer->start(1000*60); //every 1 minutes
+
+
+
+}
+void GpuFFT1000::autoKeepSampleTimeOut()
+{
+    QDateTime datetime = QDateTime::currentDateTime();
+    if(datetime.toString("hh:mm") == "21:08")
+    {
+        GetData();
+    }
+}
 //GPU Init ---- To Get Gpu Count
 void GpuFFT1000::GpuInitm()
 {

@@ -15,7 +15,7 @@ Item{
      height: 400
      state: "SHOW"
 
-     property int currentIndex: 0
+     property int currentIndex: 2
 
      Rectangle{
          anchors.fill: parent
@@ -24,6 +24,7 @@ Item{
              id:leftMenuBtns
              anchors.fill: parent
              ButtonSM{
+                 visible: false
                  id:menuBtn1
                  width: parent.width
                  height: 100
@@ -63,6 +64,7 @@ Item{
                  }
              }
              ButtonSM{
+                 visible: false
                  id:menuBtn2
                  width: menuBtn1.width
                  height: menuBtn1.height
@@ -98,7 +100,7 @@ Item{
                  }
                  onClicked: {
                      leftMenuBtns.menuSelect(menuBtn2)
-                     currentIndex = 2
+                     currentIndex = 1
                  }
              }
              ButtonSM{
@@ -137,7 +139,7 @@ Item{
                  }
                  onClicked: {
                      leftMenuBtns.menuSelect(menuBtn3)
-                     currentIndex = 3
+                     currentIndex = 2
                  }
              }
              function menuSelect(self)
@@ -191,7 +193,7 @@ Item{
 
 
      Component.onCompleted: {
-         var btns = [menuBtn1,menuBtn2]
+         var btns = [menuBtn1,menuBtn2,menuBtn3]
          leftMenuBtns.menuSelect(btns[currentIndex])
      }
 

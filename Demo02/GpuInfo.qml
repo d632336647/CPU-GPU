@@ -39,7 +39,7 @@ Rectangle {
             color: "#1883D7"
 //            anchors.verticalCenter: parent.verticalCenter
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 0
+            anchors.bottomMargin: -10
             anchors.horizontalCenter: parent.horizontalCenter
             MouseArea{
                 anchors.fill: parent
@@ -60,8 +60,11 @@ Rectangle {
         Row{
             id:rowtop
             anchors.top: parent.top
+            spacing: 0.12*parent.width
             anchors.topMargin: 20
             anchors.left: parent.left
+            anchors.leftMargin: 0.11*parent.width
+//            anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
             height: 0.8*cpuGpuRamBox.cGpuProportion2*root.height
             Item{
@@ -85,13 +88,14 @@ Rectangle {
                     id:cpuProcess
                     anchors.top: cpuLable.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
-                    width: parent.width - 30
+                    width: parent.width
                     height: width
                     showGrow: false
                     Component.onCompleted: {percent = GetSysInfo.getCpuPercent()/100.0}
                 }
                 Text{
                     id:cpuLable2
+                    visible: false
                     anchors.top: cpuProcess.bottom
                     anchors.left: parent.left
                     anchors.leftMargin:  20
@@ -106,6 +110,7 @@ Rectangle {
                 }
                 ProgressGrillX{
                     id:cpuTemp
+                    visible: false
                     anchors.top: cpuLable2.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: parent.width - 30
@@ -118,6 +123,7 @@ Rectangle {
 
             Item{
                 id:gpu0
+                visible: false
                 property real gpuPercent: 0
                 property real cachePercent: 0
                 width: 0.33*parent.width
@@ -171,6 +177,7 @@ Rectangle {
                     percent: gpu0.cachePercent/100.0
                 }
             }
+
             Item{
                 width: 0.33*parent.width
                 height: width
@@ -191,7 +198,7 @@ Rectangle {
                     id:ramProcess
                     anchors.top: ramLable.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
-                    width: parent.width - 30
+                    width: parent.width
                     height: width
                     showGrow: false
                     Component.onCompleted: {
@@ -199,38 +206,44 @@ Rectangle {
                         valueChange.start()
                     }
                 }
-                Text{
-                    id:ramLable2
-                    anchors.top: ramProcess.bottom
-                    anchors.left: parent.left
-                    anchors.leftMargin:  8
-                    anchors.right: parent.right
-                    height: 30
-                    text: "物理：16GB"
-                    font.family: FlatDark.fontFamily
-                    color:FlatDark.fontColor
-                    font.pixelSize: FlatDark.mainFontSize
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignLeft
-                }
-                Text{
-                    id:ramLable3
-                    anchors.top: ramLable2.bottom
-
-                    anchors.left: parent.left
-                    anchors.leftMargin: 8
-                    anchors.right: parent.right
-                    height: 20
-                    text: "虚拟: 16GB"
-                    font.family: FlatDark.fontFamily
-                    color:FlatDark.fontColor
-                    font.pixelSize: FlatDark.mainFontSize
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignLeft
-                }
             }
         }
-
+        Rectangle {
+            id: nc
+            width: parent.width-0.2*parent.width
+            height: 20
+//            anchors.left: parent.left
+//            anchors.leftMargin: 0.1*parent.width
+            anchors.horizontalCenter: parent.horizontalCenter
+//            anchors.horizontalCenterOffset:  -0.1*parent.width
+            anchors.bottom: rowtop.bottom
+            color: "#00000000"
+            border.color: "#0afffc"
+            Text{
+                id:ramLable2
+                height: 20
+                anchors.left: parent.left
+                anchors.leftMargin: 0.05*parent.width
+                text: "物理内存：16GB"
+                font.family: FlatDark.fontFamily
+                color:FlatDark.fontColor
+                font.pixelSize: FlatDark.mainFontSize
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignLeft
+            }
+            Text{
+                id:ramLable3
+                height: 20
+                text: "虚拟内存: 16GB"
+                anchors.right:  parent.right
+                anchors.rightMargin: 0.05*parent.width
+                font.family: FlatDark.fontFamily
+                color:FlatDark.fontColor
+                font.pixelSize: FlatDark.mainFontSize
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignLeft
+            }
+        }
 
         Rectangle {
             id: title
@@ -538,12 +551,14 @@ Rectangle {
              Transition {
                  from:"SHOW"
                  to: "HIDE"
-                 PropertyAnimation { properties: "cGpuProportion"; duration: 1000; easing.type: Easing.OutExpo }
+                 PropertyAnimation { properties: "cGpuProportion";
+                     duration: 1000; easing.type: Easing.OutExpo }
              },
              Transition {
                  from:"HIDE"
                  to: "SHOW"
-                 PropertyAnimation { properties: "cGpuProportion"; duration: 1000; easing.type: Easing.OutExpo }//OutCubic
+                 PropertyAnimation { properties: "cGpuProportion";
+                     duration: 1000; easing.type: Easing.OutExpo }//OutCubic
              }
         ]
 
@@ -758,16 +773,14 @@ Rectangle {
         }
         ListModel {
             id: sysModel
-//            ListElement {
-//              icon: "\ue69f"
-//              textColor:"#c0c0c0"
-//              name: "SSD1 C:\\"
-//              size: "120GB"
-//              temp: "46℃"
-//              used: 0.89
-//            }
-
-
+            //ListElement {
+            //  icon: "\ue69f"
+            //  textColor:"#c0c0c0"
+            //  name: "SSD1 C:\\"
+            //  size: "120GB"
+            //  temp: "46℃"
+            //  used: 0.89
+            //}
         }
         ScrollView{
             id:borderSysBox
@@ -781,10 +794,10 @@ Rectangle {
                 anchors.fill: parent
                 model: sysModel
                 delegate: sysDelegate
-//                highlightMoveDuration: 200
-//                highlight: Rectangle {
-//                            color: "#808080"
-//                          }
+                //highlightMoveDuration: 200
+                //highlight: Rectangle {
+                //            color: "#808080"
+                //          }
                 onCurrentIndexChanged: {
 
                 }
@@ -834,6 +847,7 @@ Rectangle {
             for(var current = 0;current<GetSysInfo.getDiskCount();current++)
             {
                     var model = sysModel.get(current);
+                if(model !== undefined)
                     model.percents = GetSysInfo.getDiskPercent(current)/100.0
             }
 
@@ -865,15 +879,19 @@ Rectangle {
 
     //初始化时 获取总内存 虚拟内存 GPU数量等信息
     Component.onCompleted: {
-        ramLable2.text = "物理：" +GetSysInfo.getMemoryP()+"GB"
-        ramLable3.text = "虚拟：" +GetSysInfo.getMemoryV()+"GB"
+        ramLable2.text = "物理内存：" +GetSysInfo.getMemoryP()+"GB"
+        ramLable3.text = "虚拟内存：" +GetSysInfo.getMemoryV()+"GB"
 
         sysListView.currentIndex = 0
         sysModel.clear()
         for(var current = 0;current<GetSysInfo.getDiskCount();current++)
         {
 //            console.log("current:",current)
-            sysModel.append({"icon":"\ue69f","name":GetSysInfo.getDiskName(current),"size":GetSysInfo.getDiskAll(current),"temp":"50","percents":GetSysInfo.getDiskPercent(current)/100.0})
+            sysModel.append({"icon":"\ue69f",
+                                "name":GetSysInfo.getDiskName(current),
+                                "size":GetSysInfo.getDiskAll(current),
+                                "temp":"50",
+                                "percents":GetSysInfo.getDiskPercent(current)/100.0})
         }
 
         //GPU 确定核心数及获取使用率
@@ -881,7 +899,7 @@ Rectangle {
         var gpu0percent =0
         var gpu0cache   =0
         //全部灰掉
-        gpu0.opacity = 0.1
+        gpu0.opacity = 0.0
         for(current = 0;current< 4;current++)
         {
             gpuArray[current].opacity = 0.1
@@ -892,15 +910,15 @@ Rectangle {
             gpuArray[current].opacity = 1;
             gpuArray[current].gpuPercent = GetSysInfo.getGpuPercent(current)
             gpuArray[current].cachePercent = GetSysInfo.getGpuCache(current)
-            gpu0percent += gpuArray[current].gpuPercent
-            gpu0cache   += gpuArray[current].cachePercent
+//            gpu0percent += gpuArray[current].gpuPercent
+//            gpu0cache   += gpuArray[current].cachePercent
         }
-        //计算平均
-        if(GetSysInfo.getGpuCount() !== 0)
-        {
-            gpu0.opacity = 1
-            gpu0.gpuPercent = gpu0percent/GetSysInfo.getGpuCount()
-            gpu0.cachePercent = gpu0cache/GetSysInfo.getGpuCount()
-        }
+//        //计算平均
+//        if(GetSysInfo.getGpuCount() !== 0)
+//        {
+//            gpu0.opacity = 1
+//            gpu0.gpuPercent = gpu0percent/GetSysInfo.getGpuCount()
+//            gpu0.cachePercent = gpu0cache/GetSysInfo.getGpuCount()
+//        }
     }
 }

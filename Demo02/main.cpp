@@ -6,6 +6,8 @@
 #include <QFontDatabase>
 #include "getsysinfo.h"
 
+#include "./thrift/src/thriftlocal.h"
+int thrift_main(int portNum, ThriftLocal *tl);
 
 int main(int argc, char *argv[])
 {
@@ -29,10 +31,15 @@ int main(int argc, char *argv[])
 
     QObject::connect(viewer.engine(), &QQmlEngine::quit, &viewer, &QWindow::close);
 
-//    viewer.setTitle(QStringLiteral("Flat Dark"));
-    viewer.rootContext()->setContextProperty("GetSysInfo", new GetSysInfo);
+    GetSysInfo getsysinfo;
+    viewer.rootContext()->setContextProperty("GetSysInfo", &getsysinfo);
     GpuFFT1000 gpufft;
-//    gpufft.GetData();
+
+    //***********************
+    ThriftLocal xmlThriftServer;
+    xmlThriftServer.xmlSysInfo = &getsysinfo;
+    thrift_main(9090, &xmlThriftServer);
+    //***********************
     viewer.rootContext()->setContextProperty("GpuFFT1000", &gpufft);
     viewer.setSource(QUrl("qrc:/main.qml"));    //将源代码设置额为url，装入QML组件并实例化它
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
@@ -48,6 +55,6 @@ int main(int argc, char *argv[])
 //    viewer.rootContext()->setContextProperty("dataManage", &dataManage);
 
     viewer.show();
-
+//    viewer.move ((QApplication::desktop()->width() - w.width())/2,(QApplication::desktop()->height() - w.height())/2);
     return app.exec();
 }

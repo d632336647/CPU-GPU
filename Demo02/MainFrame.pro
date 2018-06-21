@@ -15,7 +15,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp \
     getsysinfo.cpp \
-    gpufft1000.cpp
+    gpufft1000.cpp \
+    thrift/src/Collect.cpp \
+    thrift/src/msg_types.cpp \
+    thrift/src/server.cpp \
+    thrift/src/thriftlocal.cpp
 
 RESOURCES += qml.qrc \
     rc.qrc
@@ -37,7 +41,10 @@ DISTFILES +=
 
 HEADERS += \
     getsysinfo.h \
-    gpufft1000.h
+    gpufft1000.h \
+    thrift/src/Collect.h \
+    thrift/src/msg_types.h \
+    thrift/src/thriftlocal.h
 
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/LIB/NVML/ -lnvml
@@ -47,9 +54,11 @@ INCLUDEPATH += $$PWD/LIB/NVML
 DEPENDPATH += $$PWD/LIB/NVML
 
 
-
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/LIB/GpuFFTdll_v8.0/ -lgpuFFT
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/LIB/GpuFFTdll_v8.0/ -lgpuFFTd
 
 INCLUDEPATH += $$PWD/LIB/GpuFFTdll_v8.0
 DEPENDPATH += $$PWD/LIB/GpuFFTdll_v8.0
+
+INCLUDEPATH += $$PWD/thrift/include
+LIBS += -L$$PWD/thrift/lib -llibthrift -llibssl -llibcrypto

@@ -6,6 +6,7 @@
 #define TIME 1000
 GetSysInfo::GetSysInfo(QObject *parent) : QObject(parent)
 {
+    GetINFO();
 //    GetSysMemory();
     //定时采集 TIME 秒
     timerCPU = new QTimer(this);
@@ -114,9 +115,9 @@ int GetSysInfo::GetGpuUsedTotal()
     unsigned int device_count, i;
     QString GPUInfoStr = "";
     QString findoutGPUinfoStr = "";
-    // First initialize NVML library
+    //First initialize NVML library
     result = nvmlInit();
-//    QString errorInfoStr = "";
+    //QString errorInfoStr = "";
     if (NVML_SUCCESS != result)
     {
         errorInfoStr = "Failed to initialize NVML:" +QString (nvmlErrorString(result)) ;
@@ -149,17 +150,17 @@ int GetSysInfo::GetGpuUsedTotal()
         result = nvmlDeviceGetUtilizationRates(device, &utilization);
         if (NVML_SUCCESS != result)
         {
-//            qDebug()<<"device " <<QString::number(1) <<" nvmlDeviceGetUtilizationRates Failed : " <<QString::number(result) << "-" << nvmlErrorString(result);
+            //qDebug()<<"device " <<QString::number(1) <<" nvmlDeviceGetUtilizationRates Failed : " <<QString::number(result) << "-" << nvmlErrorString(result);
             return 1;
         }
         else
         {
             //printf("----- 使用率 ----- \n");
-//            qDebug()<<"GPU" <<QString::number(i) << "使用率："  <<QString::number(utilization.gpu);
+            //qDebug()<<"GPU" <<QString::number(i) << "使用率："  <<QString::number(utilization.gpu);
             GPUInfoStr.append(findoutGPUinfoStr);
             gpuPercent = QString::number(utilization.gpu);
 
-//            qDebug()<<"显存使用率：" <<QString::number(utilization.memory);
+            //qDebug()<<"显存使用率：" <<QString::number(utilization.memory);
             GPUInfoStr.append(findoutGPUinfoStr);
             gpuCaChe = QString::number(utilization.memory);
 
@@ -245,7 +246,6 @@ bool GetSysInfo::GetSysDisk()
 #else
     process->start("df -h");
 #endif
-
     return true;
 }
 

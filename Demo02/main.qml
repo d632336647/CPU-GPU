@@ -37,7 +37,7 @@ Item{
     }
 
     Rectangle{
-         id:roots
+         id:root
          anchors.centerIn: parent
          width: rootShadow.width - 2
          height: rootShadow.height - 2
@@ -106,7 +106,7 @@ Item{
                      windowLoader.visible= true
                      break;
                  case 2:
-                     windowLoader.source = "PageSysOverview.qml"
+                     windowLoader.source = "GpuInfo.qml"
                      windowLoader.visible= true
                      break;
                  case 3:
@@ -117,6 +117,7 @@ Item{
                      break;
                  }
              }
+             Component.onCompleted: windowLoader.source = "GpuInfo.qml"
 
          }//end leftMenu
 
@@ -135,11 +136,11 @@ Item{
                      focus = true
                  }
              }
-             PageK7Demo {
-                 id: k7demo
-                 anchors.fill: parent
-                 visible: true
-             }
+//             PageK7Demo {
+//                 id: k7demo
+//                 anchors.fill: parent
+//                 visible: true
+//             }
          }
 
 
@@ -203,7 +204,7 @@ Item{
 
     function exitApp()
     {
-        k7demo.safeClean()
+//        k7demo.safeClean()
         Qt.quit()
     }
 }

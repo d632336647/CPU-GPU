@@ -9,6 +9,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDateTime>
+#include <QTimer>
 #include <nvml.h>
 #include <QDebug>
 
@@ -51,6 +52,7 @@ signals:
     void writeDefeated();
 public slots:
      void GetData();
+     void autoKeepSampleTimeOut();
 };
 
 #endif // GPUFFT1000_H
