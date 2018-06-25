@@ -194,12 +194,6 @@ Item{
              //visible: false
          }
 
-
-         Component.onCompleted: {
-
-         }
-
-
     }///end root
 
     function exitApp()

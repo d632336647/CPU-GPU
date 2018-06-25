@@ -50,7 +50,7 @@ Rectangle {
         color:"#d0d0d0"
         font.family: "幼圆"
         font.pixelSize: 18
-        text: "K7Demo v0.0.1 Beta"
+        text: "GPU参数估计"
         height: parent.height * 0.7
         anchors.top: parent.top
         anchors.topMargin: parent.height * 0.2

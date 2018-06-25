@@ -37,10 +37,10 @@ Item {
             onPaint: {
                 var ctx = getContext('2d')
                 ctx.beginPath();
-                ctx.lineWidth = circleWidth
+                ctx.lineWidth = circleWidth+6
 //                ctx.strokeStyle = "#25303B";
                 ctx.strokeStyle = "#404244"
-                ctx.arc(width/2, height/2,  r-iw,  0, 2*Math.PI);
+                ctx.arc(width/2, height/2,  r-iw-6,  0, 2*Math.PI);
                 //ctx.fill();  //填充
                 ctx.stroke()
             }
@@ -56,9 +56,9 @@ Item {
                 //ctx.save();
                 ctx.clearRect(0, 0, cricleMask.width, cricleMask.height);
                 ctx.beginPath();
-                ctx.lineWidth = circleWidth
+                ctx.lineWidth = circleWidth+6
                 ctx.strokeStyle = shadowColor
-                ctx.arc(width/2, height/2,  r-iw,  0, d);
+                ctx.arc(width/2, height/2,  r-iw-6,  0, d);
                 //ctx.fill();  //填充
                 ctx.stroke()
             }

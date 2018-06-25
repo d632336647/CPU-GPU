@@ -132,7 +132,7 @@ Item{
                          font.family: FlatDark.fontFamily
                          color:FlatDark.fontColor
                          font.pixelSize: 16
-                         text: "系统参数"
+                         text: "系统状态"
                          verticalAlignment: Text.AlignVCenter
                          horizontalAlignment: Text.AlignHCenter
                      }

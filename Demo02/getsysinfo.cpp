@@ -224,24 +224,27 @@ bool GetSysInfo::GetSysDisk()
     DiskInfoList.clear();
     foreach (QFileInfo dir, list) {
         QString dirName = dir.absolutePath();
-        QString use ="";
-        QString free ="";
-        QString all ="";
-        int percent =0;
-        LPCWSTR lpcwstrDriver = (LPCWSTR)dirName.utf16();
-        ULARGE_INTEGER liFreeBytesAvailable, liTotalBytes, liTotalFreeBytes;
-        if(GetDiskFreeSpaceEx(lpcwstrDriver, &liFreeBytesAvailable, &liTotalBytes, &liTotalFreeBytes) )
+        if(GetDriveType((LPCWSTR)dirName.utf16()) == DRIVE_FIXED)
         {
-            use = QString::number((double) (liTotalBytes.QuadPart - liTotalFreeBytes.QuadPart) / GB, 'f', 1)+"G";
-            free = QString::number((double) liTotalFreeBytes.QuadPart / GB, 'f', 1)+"G";
-            all = QString::number((double) liTotalBytes.QuadPart / GB, 'f', 1)+"G";
-            percent = 100 - ((double)liTotalFreeBytes.QuadPart / liTotalBytes.QuadPart) * 100;
+            QString use ="";
+            QString free ="";
+            QString all ="";
+            int percent =0;
+            LPCWSTR lpcwstrDriver = (LPCWSTR)dirName.utf16();
+            ULARGE_INTEGER liFreeBytesAvailable, liTotalBytes, liTotalFreeBytes;
+            if(GetDiskFreeSpaceEx(lpcwstrDriver, &liFreeBytesAvailable, &liTotalBytes, &liTotalFreeBytes) )
+            {
+                use = QString::number((double) (liTotalBytes.QuadPart - liTotalFreeBytes.QuadPart) / GB, 'f', 1)+"G";
+                free = QString::number((double) liTotalFreeBytes.QuadPart / GB, 'f', 1)+"G";
+                all = QString::number((double) liTotalBytes.QuadPart / GB, 'f', 1)+"G";
+                percent = 100 - ((double)liTotalFreeBytes.QuadPart / liTotalBytes.QuadPart) * 100;
+            }
+            //依次加入链表
+            ListFileInfo fileListItem;
+            fileListItem = {use,free,all,dirName,percent};
+    //        qDebug() <<QString::number(fileListItem.diskPercent);
+            DiskInfoList.append(fileListItem);
         }
-        //依次加入链表
-        ListFileInfo fileListItem;
-        fileListItem = {use,free,all,dirName,percent};
-//        qDebug() <<QString::number(fileListItem.diskPercent);
-        DiskInfoList.append(fileListItem);
     }
 #else
     process->start("df -h");
