@@ -163,14 +163,14 @@ Item{
      //过渡动画
      states: [
          State {
-             name: "HIDE"
+             name: "HIDE";
              PropertyChanges { target: leftMenu; x: -0.1*root.width}
              onCompleted:{
 
              }
          },
          State {
-             name: "SHOW"
+             name: "SHOW";
              PropertyChanges { target: leftMenu; x: 0}
              onCompleted: {
 
@@ -180,13 +180,13 @@ Item{
 
      transitions: [
           Transition {
-              from: "SHOW"
-              to: "HIDE"
+              from: "SHOW";
+              to: "HIDE";
               PropertyAnimation { properties: "x"; duration: 1000; easing.type: Easing.OutExpo }
           },
           Transition {
-              from: "HIDE"
-              to: "SHOW"
+              from: "HIDE";
+              to: "SHOW";
               PropertyAnimation { properties: "x"; duration: 1000; easing.type: Easing.OutExpo }//OutCubic
           }
      ]

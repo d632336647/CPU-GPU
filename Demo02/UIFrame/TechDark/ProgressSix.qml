@@ -145,6 +145,7 @@ Item {
 
 
         Rectangle{
+            visible: false
             anchors.centerIn: parent
             width: parent.width
             height: iw - circleWidth

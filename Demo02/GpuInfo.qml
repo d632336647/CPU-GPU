@@ -32,6 +32,7 @@ Rectangle {
         //border.color: "#808080"
         //radius: 4
         Text {
+            visible: false
             id: moreButton
             font.family: "themify"
             text: qsTr("\ue6e6")
@@ -122,63 +123,6 @@ Rectangle {
             }
 
             Item{
-                id:gpu0
-                visible: false
-                property real gpuPercent: 0
-                property real cachePercent: 0
-                width: 0.33*parent.width
-                height: width
-                Text{
-                    id:gpuLable0
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    height: 30
-                    text: "GPU使用率"
-                    font.family: FlatDark.fontFamily
-                    color:FlatDark.fontColor
-                    font.pixelSize: FlatDark.mainFontSize
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                }
-                ProgressCircle{
-                    id:gpuProcess0
-                    anchors.top: gpuLable0.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: parent.width - 30
-                    height: width
-                    showGrow: false
-                    percent: gpu0.gpuPercent/100.0
-                    Component.onCompleted: {percent = gpu0.gpuPercent/GetSysInfo.getGpuCount()}
-                }
-                Text{
-                    id:gpuLable01
-                    anchors.top: gpuProcess0.bottom
-                    anchors.left: parent.left
-                    anchors.leftMargin:  20
-                    anchors.right: parent.right
-                    height: 30
-                    text: "显存:"+gpu0.cachePercent/100.0+"%"
-                    font.family: FlatDark.fontFamily
-                    color:FlatDark.fontColor
-                    font.pixelSize: FlatDark.mainFontSize
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignLeft
-                }
-                ProgressGrillX{
-                    id:gpuTemp0
-                    anchors.top: gpuLable01.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: parent.width - 30
-                    iw: 2
-                    height: 20
-                    cubeMargin: 1
-                    showGrow: false
-                    percent: gpu0.cachePercent/100.0
-                }
-            }
-
-            Item{
                 width: 0.33*parent.width
                 height: width
                 Text{
@@ -212,11 +156,8 @@ Rectangle {
             id: nc
             width: parent.width-0.2*parent.width
             height: 20
-//            anchors.left: parent.left
-//            anchors.leftMargin: 0.1*parent.width
-            anchors.horizontalCenter: parent.horizontalCenter
-//            anchors.horizontalCenterOffset:  -0.1*parent.width
             anchors.bottom: rowtop.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
             color: "#00000000"
             border.color: "#0afffc"
             Text{
@@ -244,289 +185,501 @@ Rectangle {
                 horizontalAlignment: Text.AlignLeft
             }
         }
-
-        Rectangle {
-            id: title
-            anchors.bottom: rowmiddle.top
-//            anchors.bottom: rowdown.bottom
-            width: parent.width
-            height: 30
-            color: "#00000000"
-//            border.color: "#1883D7"
-            Rectangle{
-                height: 1
-                width: parent.width-20
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: "#1883d7"
-            }
-            Text {
-                id: titletext
-                anchors.centerIn: parent
-                font.family: "themify"
-                text: qsTr("\ue684 GPU-状态详情")
-                color: "#1883D7"
-                font.pixelSize: 20
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignLeft
-            }
-        }
         Row{
             id:rowmiddle
             anchors.top: rowtop.bottom
-            anchors.topMargin: 60
+            anchors.topMargin: 10
             anchors.left: parent.left
             width: parent.width
-            height: cpuGpuRamBox.cGpuProportion2*root.height
+//            height: cpuGpuRamBox.cGpuProportion2*root.height
             Item{
                 id:gpu1
+                scale: 1
                 property real gpuPercent: 0
                 property real cachePercent: 0
                 width: 0.5*parent.width
-                height: width
+                height: width-20
                 Text{
                     id:gpuLable1
                     anchors.top: parent.top
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    height: 30
+                    height: 20
                     text: "[1]-使用率"
                     font.family: FlatDark.fontFamily
                     color:FlatDark.fontColor
-                    font.pixelSize: FlatDark.mainFontSize+10
-                    verticalAlignment: Text.AlignVCenter
+                    font.pixelSize: FlatDark.mainFontSize+6
                     horizontalAlignment: Text.AlignHCenter
                 }
                 ProgressSix{
                     id:gpuProcess1
-                    anchors.top: gpuLable1.bottom
+                    anchors.top: gpuLable1.top
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: parent.width - 30
-                    height: width
+                    height: gpuProcess1.width
                     showGrow: false
                     percent: gpu1.gpuPercent/100.0
-//                    Component.onCompleted: { percent = gpuPercent }
-                }
-                Text{
-                    id:gpuLable11
-                    anchors.top: gpuProcess1.bottom
-                    anchors.left: parent.left
-                    anchors.leftMargin:  20
-                    anchors.right: parent.right
-                    height: 30
-                    text: "显存:" +gpu1.cachePercent+"%"
-                    font.family: FlatDark.fontFamily
-                    color:FlatDark.fontColor
-                    font.pixelSize: FlatDark.mainFontSize+10
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignLeft
                 }
                 ProgressSixGrilX{
                     id:gpuTemp1
-                    anchors.top: gpuLable11.bottom
+                    anchors.bottom: gpuProcess1.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: parent.width - 30
                     iw: 2
-                    height: 20
+                    height: 10
                     cubeMargin: 1
                     showGrow: false
                     percent: gpu1.cachePercent/100.0
-
                 }
-//                onGpuPercentChanged: {
-//                    gpuProcess1.percent = gpuPercent/100.0
-//                }
-//                onCachePercentChanged: {
-//                    gpuLable11.text = "显存:" +cachePercent+"%"
-//                    gpuTemp1.percent = cachePercent/100.0
-//                }
+                Text{
+                    id:gpuLable11
+                    anchors.bottom: gpuTemp1.top
+                    anchors.bottomMargin: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin:  20
+                    anchors.right: parent.right
+                    height: 20
+                    text: "显存:" +gpu1.cachePercent+"%"
+                    font.family: FlatDark.fontFamily
+                    color:FlatDark.fontColor
+                    font.pixelSize: FlatDark.mainFontSize+6
+                    horizontalAlignment: Text.AlignLeft
+                }
             }
 
             Item{
                 id:gpu2
+                scale: 1
                 property real gpuPercent: 0
                 property real cachePercent: 0
                 width: 0.5*parent.width
-                height: width
+                height: width-20
                 Text{
                     id:gpuLable2
                     anchors.top: parent.top
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    height: 30
+                    height: 20
                     text: "[2]-使用率"
                     font.family: FlatDark.fontFamily
                     color:FlatDark.fontColor
-                    font.pixelSize: FlatDark.mainFontSize+10
-                    verticalAlignment: Text.AlignVCenter
+                    font.pixelSize: FlatDark.mainFontSize+6
                     horizontalAlignment: Text.AlignHCenter
                 }
                 ProgressSix{
                     id:gpuProcess2
-                    anchors.top: gpuLable2.bottom
+                    anchors.top: gpuLable2.top
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: parent.width - 30
                     height: width
                     showGrow: false
                     percent:gpu2.gpuPercent/100.0
                 }
-                Text{
-                    id:gpuLable21
-                    anchors.top: gpuProcess2.bottom
-                    anchors.left: parent.left
-                    anchors.leftMargin:  20
-                    anchors.right: parent.right
-                    height: 30
-                    text: "显存:"+gpu2.cachePercent+"%"
-                    font.family: FlatDark.fontFamily
-                    color:FlatDark.fontColor
-                    font.pixelSize: FlatDark.mainFontSize+10
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignLeft
-                }
                 ProgressSixGrilX{
                     id:gpuTemp2
-                    anchors.top: gpuLable21.bottom
+                    anchors.bottom: gpuProcess2.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: parent.width - 30
                     iw: 2
-                    height: 20
+                    height: 10
                     cubeMargin: 1
                     showGrow: false
                     percent:gpu2.cachePercent/100.0
                 }
-
+                Text{
+                    id:gpuLable21
+                    anchors.bottom: gpuTemp2.top
+                    anchors.bottomMargin: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin:  20
+                    anchors.right: parent.right
+                    height: 20
+                    text: "显存:"+gpu2.cachePercent+"%"
+                    font.family: FlatDark.fontFamily
+                    color:FlatDark.fontColor
+                    font.pixelSize: FlatDark.mainFontSize+6
+                    horizontalAlignment: Text.AlignLeft
+                }
             }
         }
-        Rectangle {
-
-            anchors.bottom: rowdown.top
-//            anchors.bottom: rowdown.bottom
-            width: parent.width
-            height: 30
-            color: "#00000000"
-//            border.color: "#1883D7"
-            Rectangle{
-                height: 1
-                width: parent.width-80
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: "#1883d7"
-
-            }
+        Rectangle
+        {
+            width: parent.width-30
+            height: 1
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: "#d0d0d0"
+            anchors.bottom: rowmiddle.bottom
+            opacity: 0.3
         }
         Row{
             id:rowdown
             anchors.top: rowmiddle.bottom
-            anchors.topMargin: 0.1*parent.height
+            anchors.topMargin: 5
             anchors.left: parent.left
             width: parent.width
-            height: cpuGpuRamBox.cGpuProportion2*root.heightt
+//            height: cpuGpuRamBox.cGpuProportion2*root.heightt
             Item{
                 id:gpu3
+                scale: 1
                 property real gpuPercent: 0
                 property real cachePercent: 0
                 width: 0.5*parent.width
-                height: width
+                height: width-20
                 Text{
                     id:gpuLable3
                     anchors.top: parent.top
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    height: 30
+                    height: 20
                     text: "[3]-使用率"
                     font.family: FlatDark.fontFamily
                     color:FlatDark.fontColor
-                    font.pixelSize: FlatDark.mainFontSize+10
-                    verticalAlignment: Text.AlignVCenter
+                    font.pixelSize: FlatDark.mainFontSize+6
                     horizontalAlignment: Text.AlignHCenter
                 }
                 ProgressSix{
                     id:gpuProcess3
-                    anchors.top: gpuLable3.bottom
+                    anchors.top: gpuLable3.top
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: parent.width - 30
                     height: width
                     showGrow: false
                     percent: gpu3.gpuPercent/100.0
                 }
-                Text{
-                    id:gpuLable31
-                    anchors.top: gpuProcess3.bottom
-                    anchors.left: parent.left
-                    anchors.leftMargin:  20
-                    anchors.right: parent.right
-                    height: 30
-                    text: "显存:"+gpu3.cachePercent+"%"
-                    font.family: FlatDark.fontFamily
-                    color:FlatDark.fontColor
-                    font.pixelSize: FlatDark.mainFontSize+10
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignLeft
-                }
                 ProgressSixGrilX{
                     id:gpuTemp3
-                    anchors.top: gpuLable31.bottom
+                    anchors.bottom: gpuProcess3.bottom
+
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: parent.width - 30
                     iw: 2
-                    height: 20
+                    height: 10
                     cubeMargin: 1
                     showGrow: false
                     percent: gpu3.cachePercent/100.0
                 }
+                Text{
+                    id:gpuLable31
+                    anchors.bottom: gpuTemp3.top
+                    anchors.bottomMargin: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin:  20
+                    anchors.right: parent.right
+                    height: 20
+                    text: "显存:"+gpu3.cachePercent+"%"
+                    font.family: FlatDark.fontFamily
+                    color:FlatDark.fontColor
+                    font.pixelSize: FlatDark.mainFontSize+6
+                    horizontalAlignment: Text.AlignLeft
+                }
             }
-
             Item{
                 id:gpu4
+                scale: 1
                 property real gpuPercent: 0
                 property real cachePercent: 0
                 width: 0.5*parent.width
-                height: width
+                height: width-20
                 Text{
                     id:gpuLable4
                     anchors.top: parent.top
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    height: 30
+                    height: 20
                     text: "[4]-使用率"
                     font.family: FlatDark.fontFamily
                     color:FlatDark.fontColor
-                    font.pixelSize: FlatDark.mainFontSize+10
-                    verticalAlignment: Text.AlignVCenter
+                    font.pixelSize: FlatDark.mainFontSize+6
                     horizontalAlignment: Text.AlignHCenter
                 }
                 ProgressSix{
                     id:gpuProcess4
-                    anchors.top: gpuLable4.bottom
+                    anchors.top: gpuLable4.top
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: parent.width - 30
                     height: width
                     showGrow: false
                     percent: gpu4.gpuPercent/100.0
                 }
-                Text{
-                    id:gpuLable41
-                    anchors.top: gpuProcess4.bottom
-                    anchors.left: parent.left
-                    anchors.leftMargin:  20
-                    anchors.right: parent.right
-                    height: 30
-                    text: "显存:"+gpu4.cachePercent+"%"
-                    font.family: FlatDark.fontFamily
-                    color:FlatDark.fontColor
-                    font.pixelSize: FlatDark.mainFontSize+10
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignLeft
-                }
+
                 ProgressSixGrilX{
                     id:gpuTemp4
-                    anchors.top: gpuLable41.bottom
+                    anchors.bottom: gpuProcess4.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: parent.width - 30
                     iw: 2
-                    height: 20
+                    height: 10
                     cubeMargin: 1
                     showGrow: false
                     percent: gpu4.cachePercent/100.0
+                }
+                Text{
+                    id:gpuLable41
+                    anchors.bottom: gpuTemp4.top
+                    anchors.bottomMargin: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin:  20
+                    anchors.right: parent.right
+                    height: 20
+                    text: "显存:"+gpu4.cachePercent+"%"
+                    font.family: FlatDark.fontFamily
+                    color:FlatDark.fontColor
+                    font.pixelSize: FlatDark.mainFontSize+6
+                    horizontalAlignment: Text.AlignLeft
+                }
+            }
+        }
+        Rectangle
+        {
+            width: parent.width-30
+            height: 1
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: "#d0d0d0"
+            anchors.bottom: rowdown.bottom
+            opacity: 0.3
+        }
+        Row{
+            id:rowdown2
+            anchors.top: rowdown.bottom
+            anchors.topMargin: 5
+            anchors.left: parent.left
+            width: parent.width
+//            height: cpuGpuRamBox.cGpuProportion2*root.heightt
+            Item{
+                id:gpu5
+                scale: 1
+                property real gpuPercent: 0
+                property real cachePercent: 0
+                width: 0.5*parent.width
+                height: width-20
+                Text{
+                    id:gpuLable5
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: 20
+                    text: "[5]-使用率"
+                    font.family: FlatDark.fontFamily
+                    color:FlatDark.fontColor
+                    font.pixelSize: FlatDark.mainFontSize+6
+                    horizontalAlignment: Text.AlignHCenter
+                }
+                ProgressSix{
+                    id:gpuProcess5
+                    anchors.top: gpuLable5.top
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width - 30
+                    height: width
+                    showGrow: false
+                    percent: gpu5.gpuPercent/100.0
+                }
+                ProgressSixGrilX{
+                    id:gpuTemp5
+                    anchors.bottom: gpuProcess5.bottom
+
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width - 30
+                    iw: 2
+                    height: 10
+                    cubeMargin: 1
+                    showGrow: false
+                    percent: gpu5.cachePercent/100.0
+                }
+                Text{
+                    id:gpuLable51
+                    anchors.bottom: gpuTemp5.top
+                    anchors.bottomMargin: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin:  20
+                    anchors.right: parent.right
+                    height: 20
+                    text: "显存:"+gpu6.cachePercent+"%"
+                    font.family: FlatDark.fontFamily
+                    color:FlatDark.fontColor
+                    font.pixelSize: FlatDark.mainFontSize+6
+                    horizontalAlignment: Text.AlignLeft
+                }
+            }
+            Item{
+                id:gpu6
+                scale: 1
+                property real gpuPercent: 0
+                property real cachePercent: 0
+                width: 0.5*parent.width
+                height: width-20
+                Text{
+                    id:gpuLable6
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: 20
+                    text: "[6]-使用率"
+                    font.family: FlatDark.fontFamily
+                    color:FlatDark.fontColor
+                    font.pixelSize: FlatDark.mainFontSize+6
+                    horizontalAlignment: Text.AlignHCenter
+                }
+                ProgressSix{
+                    id:gpuProcess6
+                    anchors.top: gpuLable6.top
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width - 30
+                    height: width
+                    showGrow: false
+                    percent: gpu6.gpuPercent/100.0
+                }
+
+                ProgressSixGrilX{
+                    id:gpuTemp6
+                    anchors.bottom: gpuProcess6.bottom
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width - 30
+                    iw: 2
+                    height: 10
+                    cubeMargin: 1
+                    showGrow: false
+                    percent: gpu6.cachePercent/100.0
+                }
+                Text{
+                    id:gpuLable61
+                    anchors.bottom: gpuTemp6.top
+                    anchors.bottomMargin: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin:  20
+                    anchors.right: parent.right
+                    height: 20
+                    text: "显存:"+gpu6.cachePercent+"%"
+                    font.family: FlatDark.fontFamily
+                    color:FlatDark.fontColor
+                    font.pixelSize: FlatDark.mainFontSize+6
+                    horizontalAlignment: Text.AlignLeft
+                }
+            }
+        }
+        Rectangle
+        {
+            width: parent.width-30
+            height: 1
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: "#d0d0d0"
+            anchors.bottom: rowdown2.bottom
+            opacity: 0.3
+        }
+        Row{
+            id:rowdown3
+            anchors.top: rowdown2.bottom
+            anchors.topMargin: 5
+            anchors.left: parent.left
+            width: parent.width
+//            height: cpuGpuRamBox.cGpuProportion2*root.heightt
+            Item{
+                id:gpu7
+                scale: 1
+                property real gpuPercent: 0
+                property real cachePercent: 0
+                width: 0.5*parent.width
+                height: width-20
+                Text{
+                    id:gpuLable7
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: 20
+                    text: "[7]-使用率"
+                    font.family: FlatDark.fontFamily
+                    color:FlatDark.fontColor
+                    font.pixelSize: FlatDark.mainFontSize+6
+                    horizontalAlignment: Text.AlignHCenter
+                }
+                ProgressSix{
+                    id:gpuProcess7
+                    anchors.top: gpuLable7.top
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width - 30
+                    height: width
+                    showGrow: false
+                    percent: gpu7.gpuPercent/100.0
+                }
+                ProgressSixGrilX{
+                    id:gpuTemp7
+                    anchors.bottom: gpuProcess7.bottom
+
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width - 30
+                    iw: 2
+                    height: 10
+                    cubeMargin: 1
+                    showGrow: false
+                    percent: gpu7.cachePercent/100.0
+                }
+                Text{
+                    id:gpuLable71
+                    anchors.bottom: gpuTemp7.top
+                    anchors.bottomMargin: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin:  20
+                    anchors.right: parent.right
+                    height: 20
+                    text: "显存:"+gpu7.cachePercent+"%"
+                    font.family: FlatDark.fontFamily
+                    color:FlatDark.fontColor
+                    font.pixelSize: FlatDark.mainFontSize+6
+                    horizontalAlignment: Text.AlignLeft
+                }
+            }
+            Item{
+                id:gpu8
+                scale: 1
+                property real gpuPercent: 0
+                property real cachePercent: 0
+                width: 0.5*parent.width
+                height: width-20
+                Text{
+                    id:gpuLable8
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: 20
+                    text: "[8]-使用率"
+                    font.family: FlatDark.fontFamily
+                    color:FlatDark.fontColor
+                    font.pixelSize: FlatDark.mainFontSize+6
+                    horizontalAlignment: Text.AlignHCenter
+                }
+                ProgressSix{
+                    id:gpuProcess8
+                    anchors.top: gpuLable8.top
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width - 30
+                    height: width
+                    showGrow: false
+                    percent: gpu8.gpuPercent/100.0
+                }
+
+                ProgressSixGrilX{
+                    id:gpuTemp8
+                    anchors.bottom: gpuProcess8.bottom
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width - 30
+                    iw: 2
+                    height: 10
+                    cubeMargin: 1
+                    showGrow: false
+                    percent: gpu8.cachePercent/100.0
+                }
+                Text{
+                    id:gpuLable81
+                    anchors.bottom: gpuTemp8.top
+                    anchors.bottomMargin: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin:  20
+                    anchors.right: parent.right
+                    height: 20
+                    text: "显存:"+gpu8.cachePercent+"%"
+                    font.family: FlatDark.fontFamily
+                    color:FlatDark.fontColor
+                    font.pixelSize: FlatDark.mainFontSize+6
+                    horizontalAlignment: Text.AlignLeft
                 }
             }
         }
@@ -568,10 +721,18 @@ Rectangle {
             gpuProcess2.state = "SHOW"
             gpuProcess3.state = "SHOW"
             gpuProcess4.state = "SHOW"
+            gpuProcess5.state = "SHOW"
+            gpuProcess6.state = "SHOW"
+            gpuProcess7.state = "SHOW"
+            gpuProcess8.state = "SHOW"
             gpuTemp1.state    = "SHOW"
             gpuTemp2.state    = "SHOW"
             gpuTemp3.state    = "SHOW"
             gpuTemp4.state    = "SHOW"
+            gpuTemp5.state    = "SHOW"
+            gpuTemp6.state    = "SHOW"
+            gpuTemp7.state    = "SHOW"
+            gpuTemp8.state    = "SHOW"
         }
     }//END 底部右侧 CPU GPU RAM状态显示
 
@@ -588,7 +749,7 @@ Rectangle {
         anchors.leftMargin: 4
         anchors.right: parent.right
         anchors.rightMargin: 4
-        height:cpuGpuRamBox.cGpuProportion2*parent.height
+        height:0.27*parent.height
         width: 0.7*parent.width
         color: "black"
         //border.color: "#808080"
@@ -818,24 +979,40 @@ Rectangle {
         if(cpuGpuRamBox.state == "SHOW")
         {
         cpuGpuRamBox.state= "HIDE"
-        gpuProcess1.state = "HIDE"
-        gpuProcess2.state = "HIDE"
-        gpuProcess3.state = "HIDE"
-        gpuProcess4.state = "HIDE"
-        gpuTemp1.state    = "HIDE"
-        gpuTemp2.state    = "HIDE"
-        gpuTemp3.state    = "HIDE"
-        gpuTemp4.state    = "HIDE"
+            gpuProcess1.state = "HIDE"
+            gpuProcess2.state = "HIDE"
+            gpuProcess3.state = "HIDE"
+            gpuProcess4.state = "HIDE"
+            gpuProcess5.state = "HIDE"
+            gpuProcess6.state = "HIDE"
+//            gpuProcess7.state = "HIDE"
+//            gpuProcess8.state = "HIDE"
+            gpuTemp1.state    = "HIDE"
+            gpuTemp2.state    = "HIDE"
+            gpuTemp3.state    = "HIDE"
+            gpuTemp4.state    = "HIDE"
+            gpuTemp5.state    = "HIDE"
+            gpuTemp6.state    = "HIDE"
+            gpuTemp7.state    = "HIDE"
+            gpuTemp8.state    = "HIDE"
         }else{
             cpuGpuRamBox.state= "SHOW"
             gpuProcess1.state = "SHOW"
             gpuProcess2.state = "SHOW"
             gpuProcess3.state = "SHOW"
             gpuProcess4.state = "SHOW"
+            gpuProcess5.state = "SHOW"
+            gpuProcess6.state = "SHOW"
+            gpuProcess7.state = "SHOW"
+            gpuProcess8.state = "SHOW"
             gpuTemp1.state    = "SHOW"
             gpuTemp2.state    = "SHOW"
             gpuTemp3.state    = "SHOW"
             gpuTemp4.state    = "SHOW"
+            gpuTemp5.state    = "SHOW"
+            gpuTemp6.state    = "SHOW"
+            gpuTemp7.state    = "SHOW"
+            gpuTemp8.state    = "SHOW"
         }
     }
     Connections{
@@ -851,24 +1028,11 @@ Rectangle {
                     model.percents = GetSysInfo.getDiskPercent(current)/100.0
             }
 
-            var gpuArray = [gpu1,gpu2,gpu3,gpu4]
-            var gpu0percent =0  //总的使用率变量
-            var gpu0cache   =0
+            var gpuArray = [gpu1,gpu2,gpu3,gpu4,gpu5,gpu6,gpu7,gpu8]
             for(current = 0;current< GetSysInfo.getGpuCount();current++)
             {
-//                console.log("GetGpuCount::"+GetSysInfo.getGpuCount)
-//                gpuArray[current].opacity = 1;
                 gpuArray[current].gpuPercent = GetSysInfo.getGpuPercent(current)
                 gpuArray[current].cachePercent = GetSysInfo.getGpuCache(current)
-
-                gpu0percent += gpuArray[current].gpuPercent
-                gpu0cache   += gpuArray[current].cachePercent
-            }
-            //计算平均
-            if(GetSysInfo.getGpuCount() !== 0)
-            {
-            gpu0.gpuPercent = gpu0percent/GetSysInfo.getGpuCount()
-            gpu0.cachePercent = gpu0cache/GetSysInfo.getGpuCount()
             }
         }
         //错误信息显示在底部 main.qml 里面定义的 rootBorder.stateError
@@ -886,7 +1050,6 @@ Rectangle {
         sysModel.clear()
         for(var current = 0;current<GetSysInfo.getDiskCount();current++)
         {
-//            console.log("current:",current)
             sysModel.append({"icon":"\ue69f",
                                 "name":GetSysInfo.getDiskName(current),
                                 "size":GetSysInfo.getDiskAll(current),
@@ -895,12 +1058,10 @@ Rectangle {
         }
 
         //GPU 确定核心数及获取使用率
-        var gpuArray = [gpu1,gpu2,gpu3,gpu4]
-        var gpu0percent =0
-        var gpu0cache   =0
+        var gpuArray = [gpu1,gpu2,gpu3,gpu4,gpu5,gpu6,gpu7,gpu8]
         //全部灰掉
-        gpu0.opacity = 0.0
-        for(current = 0;current< 4;current++)
+
+        for(current = 0;current< 8;current++)
         {
             gpuArray[current].opacity = 0.1
         }
@@ -910,15 +1071,6 @@ Rectangle {
             gpuArray[current].opacity = 1;
             gpuArray[current].gpuPercent = GetSysInfo.getGpuPercent(current)
             gpuArray[current].cachePercent = GetSysInfo.getGpuCache(current)
-//            gpu0percent += gpuArray[current].gpuPercent
-//            gpu0cache   += gpuArray[current].cachePercent
         }
-//        //计算平均
-//        if(GetSysInfo.getGpuCount() !== 0)
-//        {
-//            gpu0.opacity = 1
-//            gpu0.gpuPercent = gpu0percent/GetSysInfo.getGpuCount()
-//            gpu0.cachePercent = gpu0cache/GetSysInfo.getGpuCount()
-//        }
     }
 }

@@ -12,7 +12,7 @@
 
 #include "./thrift/src/thriftlocal.h"
 int thrift_main(int portNum, ThriftLocal *tl);
-double readJson();
+double readJson();          //默认9090 文件里面初始化为8080
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -37,14 +37,15 @@ int main(int argc, char *argv[])
 
     GetSysInfo getsysinfo;
     viewer.rootContext()->setContextProperty("GetSysInfo", &getsysinfo);
-    GpuFFT1000 gpufft;
+
 
     //***********************
     ThriftLocal xmlThriftServer;
     xmlThriftServer.xmlSysInfo = &getsysinfo;
-    qDebug() << thrift_main((int)readJson(), &xmlThriftServer);
+    thrift_main((int)readJson(), &xmlThriftServer);
 
     //***********************
+    GpuFFT1000 gpufft;
     viewer.rootContext()->setContextProperty("GpuFFT1000", &gpufft);
     viewer.setSource(QUrl("qrc:/main.qml"));    //将源代码设置额为url，装入QML组件并实例化它
 
@@ -74,8 +75,14 @@ double readJson()
       QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
       QJsonObject sett2 = d.object();
       QJsonValue value = sett2.value(QString("thriftPort"));
-      qWarning() << value.toDouble();
-      return value.toDouble();
+//      qWarning() << value.toDouble();
+      if((int)value.toDouble() != 0)
+      {
+         return value.toDouble();
+      }
+      qDebug()<< "use defined port 8080";
+      return 8080.0;
+
 
 //      QJsonObject item = value.toObject();
 //      qWarning() << tr("QJsonObject of description: ") << item;

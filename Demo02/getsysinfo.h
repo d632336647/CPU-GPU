@@ -32,12 +32,13 @@ class GetSysInfo : public QObject
 {
     Q_OBJECT
 public:
-
     explicit GetSysInfo(QObject *parent = 0);
     ~GetSysInfo();
+
     //CPU
 //    QThread GpuCalculateThread;   //以后再放其他线程
     QTimer *timerCPU;       //定时器获取CPU信息
+    int defGpuCount = 8;    //默认最高8个核
     void GetSysCpu() ;
     //GPU
     void GpuInitm();

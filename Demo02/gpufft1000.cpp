@@ -5,13 +5,9 @@ GpuFFT1000::GpuFFT1000(QObject *parent) : QObject(parent)
     GpuInitm();
 
     QTimer *m_timer;
-
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(autoKeepSampleTimeOut()));
     m_timer->start(1000*60); //every 1 minutes
-
-
-
 }
 void GpuFFT1000::autoKeepSampleTimeOut()
 {
@@ -27,11 +23,16 @@ void GpuFFT1000::GpuInitm()
     nvmlReturn_t result;
     result = nvmlInit();
     result = nvmlDeviceGetCount(&gpu_count);
-    qDebug()<<"gpu_count:::"<<gpu_count;
 }
 void GpuFFT1000::qmlGetDate()
 {
-    GetData();
+//    //qml点击事件触发这个函数
+//    QEventLoop loop;
+//    connect(this, SIGNAL(writeSuccess()), &loop, SLOT(quit()));
+//    connect(this, SIGNAL(writeDefeated()), &loop, SLOT(quit()));
+    GetData();//计算-写入文件-读取文件至表列-发送writeSuccess writeDefeated 信号
+//    loop.exec();
+
 }
 int GpuFFT1000::getNum()
 {
@@ -53,8 +54,6 @@ QString GpuFFT1000::getValue(int num ,int index)
 
 void GpuFFT1000::GetData()
 {
-//    ReadFromData();
-    qDebug()<<"GetData";
     GpuInitm();
     double temp;
     GpuFFt.clear();
@@ -72,36 +71,30 @@ void GpuFFT1000::GetData()
 }
 void GpuFFT1000::ReadFromData()
 {
-    qDebug()<<"h";
     QString strAll;
     QStringList strList;
     QFile readFile("FFTDATA.txt");
     if(readFile.open((QIODevice::ReadOnly|QIODevice::Text)))
     {
-        qDebug()<<"h1";
         QTextStream stream(&readFile);
         strAll=stream.readAll();
         strList=strAll.split("\n");
         if(strList.length() == 1)
         {
-            qDebug()<<"h11";
             strList.clear();
         }
         if(strList.length() > 0)
         {
-            for(int ii=0;ii<4;ii++)
+            for(int ii=0;ii<defGpuCount;ii++)
             {
                 fftP[ii].clear();
             }
-            qDebug()<<"h12";
             foreach (QString onedata, strList)
             {
-                qDebug()<<"h121";
                 //QString onedata = strList.at(strList.length()-2);
                 QString time = onedata.section(">",1,1);
                 int num = onedata.count('>');
                 num = num/2-1;
-                qDebug()<<"num::"<<num;
                 if(num>0)
                 {
                     for(int idx=0;idx<num;idx++)
@@ -113,10 +106,7 @@ void GpuFFT1000::ReadFromData()
                        tempP.index = gpuIndex;
                        tempP.value = gpuValue;
                        fftP[idx].append(tempP);
-                       qDebug()<<"h1212: "<<time<<" "<<gpuValue<<" "<<gpuValue;
-                       qDebug()<<"fftPlength::"<<fftP[idx].length();
                     }
-
                 }
             }
             emit writeSuccess();
@@ -128,7 +118,6 @@ void GpuFFT1000::ReadFromData()
 
 QStringList GpuFFT1000::WriteToData()
 {
-    qDebug()<<"WriteToData";
     bool hasData = false;
     QString strAll;
     QStringList strList;
@@ -147,13 +136,11 @@ QStringList GpuFFT1000::WriteToData()
         if(strList.length() > 0)
         {
             QString onedata = strList.at(strList.length()-2);
-            //qDebug()<<"strListonedata" <<onedata;
             QString lastTime = onedata.section(">",1,1);
             //判断是否已经有当天数据
             if(lastTime == time && lastTime != "")
             {
                 hasData = true;
-                qDebug()<<"hasData" <<hasData;
             }
             //如果有当天数据
             if(hasData)
@@ -219,7 +206,6 @@ QStringList GpuFFT1000::WriteToData()
 }
 double GpuFFT1000::GetGpuFFT(int index)
 {
-    qDebug()<<"GetGpuFFT";
     int nFFTorder = 20; //20阶FFT
     int nRepeatTimes = 1000; //重复运算次数
     unsigned int DeviceIdx = index; //GPU设备ID

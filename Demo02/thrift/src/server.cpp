@@ -113,7 +113,6 @@ int thrift_main(int portNum, ThriftLocal *tl) {
 	//LOGThrift("CollectHandler 实例化完毕")("----thrift_main调用开始----");
     boost::thread thr(thrift_run, portNum, tl);
 	thr.detach();
-
 	return 0;
 }
 #endif

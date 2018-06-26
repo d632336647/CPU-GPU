@@ -12,6 +12,7 @@
 #include <QTimer>
 #include <nvml.h>
 #include <QDebug>
+//#include <QEventLoop>
 
 struct FFtPoint
 {
@@ -27,9 +28,11 @@ public:
     explicit GpuFFT1000(QObject *parent = 0);
 
     unsigned int gpu_count = 0;
-    QList<double> GpuFFt;
+    int defGpuCount = 8;    //默认最高8个核
 
-    QList<FFtPoint> fftP[4];
+    QList<double> GpuFFt;
+    QList<FFtPoint> fftP[8];
+
 
     //初始化gpu接口 获取gpu数
     void GpuInitm();

@@ -101,10 +101,8 @@ void GetSysInfo::GetINFO()
 void GetSysInfo::GpuInitm()
 {
     nvmlReturn_t result;
-//    int gpu_count;
     result = nvmlInit();
     result = nvmlDeviceGetCount(&gpu_count);
-    qDebug()<<"gpu_count:::"<<gpu_count;
 }
 
 //获取GPU使用情况
@@ -280,7 +278,7 @@ QString GetSysInfo::getMemoryV()
 //GPUqml接口
 int GetSysInfo::getGpuCount()
 {
-//    qDebug()<<GpuInfoList.length();
+//    qDebug()<<"GSI_getGpuCount"<<GpuInfoList.length();
     return GpuInfoList.length();
 
 }

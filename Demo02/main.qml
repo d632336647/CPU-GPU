@@ -11,15 +11,15 @@ import "Skin.js" as Skin
 
 Item{
     id: rootBorder
-    width: 1440+20
-    height: 900+20
+    width: 1440
+    height: 900
     property var stateError: ""
 
     Rectangle{
         id:rootShadow
         anchors.centerIn: parent
-        width: parent.width - 20
-        height: parent.height - 20
+        width: parent.width
+        height: parent.height
         color: FlatDark.MainBgColor
         border.color: FlatDark.WindowShadowColor
         z:1
