@@ -31,8 +31,20 @@ void  ThriftLocal::SetParam(int triggerType,
     const std::string& ipaddr,
     int port)
 {
-
-
+    triggerType = triggerType ;
+     clockType  = clockType  ;
+     clockFreq  = clockFreq  ;
+     ddcCoefType= ddcCoefType;
+     sourceType = sourceType ;
+     nCh        = nCh        ;
+     DDCFreq    = DDCFreq    ;
+     nMultiple  = nMultiple  ;
+     streamMode = streamMode ;
+     sTime      = sTime      ;
+     fileSize   = fileSize   ;
+     port       = port       ;
+     std::string ss = fileName;
+     ss = ipaddr;
 }
 
 

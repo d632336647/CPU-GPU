@@ -3,7 +3,7 @@
 GpuFFT1000::GpuFFT1000(QObject *parent) : QObject(parent)
 {
     GpuInitm();
-
+    connect(this, SIGNAL(startGet()),this,SLOT(GetData()));
     QTimer *m_timer;
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(autoKeepSampleTimeOut()));
@@ -12,9 +12,9 @@ GpuFFT1000::GpuFFT1000(QObject *parent) : QObject(parent)
 void GpuFFT1000::autoKeepSampleTimeOut()
 {
     QDateTime datetime = QDateTime::currentDateTime();
-    if(datetime.toString("hh:mm") == "21:08")
+    if(datetime.toString("hh:mm") == "10:00")
     {
-        GetData();
+        qmlGetDate();
     }
 }
 //GPU Init ---- To Get Gpu Count
@@ -24,15 +24,16 @@ void GpuFFT1000::GpuInitm()
     result = nvmlInit();
     result = nvmlDeviceGetCount(&gpu_count);
 }
+//全局函数 用于开辟线程
+void startCalc(GpuFFT1000 *calc)
+{
+    calc->GetData();//计算-写入文件-读取文件至表列-发送writeSuccess writeDefeated 信号
+}
 void GpuFFT1000::qmlGetDate()
 {
-//    //qml点击事件触发这个函数
-//    QEventLoop loop;
-//    connect(this, SIGNAL(writeSuccess()), &loop, SLOT(quit()));
-//    connect(this, SIGNAL(writeDefeated()), &loop, SLOT(quit()));
-    GetData();//计算-写入文件-读取文件至表列-发送writeSuccess writeDefeated 信号
-//    loop.exec();
-
+    //创建一个新线程。
+     std::thread getThread(startCalc, this);
+     getThread.detach();
 }
 int GpuFFT1000::getNum()
 {
@@ -245,6 +246,8 @@ double GpuFFT1000::GetGpuFFT(int index)
 
     double duration = (double)(finishTime - startTime) / CLOCKS_PER_SEC;
 
+    free(pSrc);
+    free(pDst);
     return duration;
     return 0;
 }

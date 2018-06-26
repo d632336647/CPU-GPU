@@ -70,8 +70,8 @@ public:
 
 
     //QML接口
-    Q_INVOKABLE float   getCpuPercent();
-    Q_INVOKABLE float   getMemoryPercent();
+    Q_INVOKABLE int   getCpuPercent();
+    Q_INVOKABLE int   getMemoryPercent();
     Q_INVOKABLE QString getMemoryP();
     Q_INVOKABLE QString getMemoryV();
 

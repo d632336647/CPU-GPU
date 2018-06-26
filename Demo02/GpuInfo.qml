@@ -92,7 +92,9 @@ Rectangle {
                     width: parent.width
                     height: width
                     showGrow: false
-                    Component.onCompleted: {percent = GetSysInfo.getCpuPercent()/100.0}
+                    Component.onCompleted: {
+                        percent = Number(GetSysInfo.getCpuPercent())/100.0
+                    }
                 }
                 Text{
                     id:cpuLable2
@@ -145,10 +147,9 @@ Rectangle {
                     width: parent.width
                     height: width
                     showGrow: false
-                    Component.onCompleted: {
-                        percent =  GetSysInfo.getMemoryPercent()/100.0
-                        valueChange.start()
-                    }
+//                    Component.onCompleted: {
+//                        percent =  Number(GetSysInfo.getMemoryPercent())/100.0
+//                    }
                 }
             }
         }
@@ -1019,7 +1020,9 @@ Rectangle {
         target: GetSysInfo
         onUpdateMes:{
             cpuProcess.percent = GetSysInfo.getCpuPercent()/100.0
-            ramProcess.percent =  GetSysInfo.getMemoryPercent()/100.0
+            //多一行是为了触发一次刷新
+            ramProcess.percent = (GetSysInfo.getMemoryPercent()-10)/100.0
+            ramProcess.percent = GetSysInfo.getMemoryPercent()/100.0
 
             for(var current = 0;current<GetSysInfo.getDiskCount();current++)
             {
@@ -1045,7 +1048,7 @@ Rectangle {
     Component.onCompleted: {
         ramLable2.text = "物理内存：" +GetSysInfo.getMemoryP()+"GB"
         ramLable3.text = "虚拟内存：" +GetSysInfo.getMemoryV()+"GB"
-
+        ramProcess.percent = 0.01
         sysListView.currentIndex = 0
         sysModel.clear()
         for(var current = 0;current<GetSysInfo.getDiskCount();current++)

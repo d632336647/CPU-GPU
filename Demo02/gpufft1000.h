@@ -12,7 +12,7 @@
 #include <QTimer>
 #include <nvml.h>
 #include <QDebug>
-//#include <QEventLoop>
+#include <thread>
 
 struct FFtPoint
 {

@@ -255,13 +255,14 @@ bool GetSysInfo::GetSysDisk()
 //QML接口函数************************//
 
 //CPU使用率qml接口
-float GetSysInfo::getCpuPercent()
+int GetSysInfo::getCpuPercent()
 {
     return cpuPercent;
 }
 //内存使用率qml接口
-float GetSysInfo::getMemoryPercent()
+int GetSysInfo::getMemoryPercent()
 {
+//    qDebug()<<"memoryPercent"<<memoryPercent;
     return memoryPercent;
 }
 //物理内存qml接口

@@ -14,11 +14,12 @@ Item {
     property bool  showGrow: true
     property alias valueChange: valueChange
     onPercentChanged: {
+//        console.log("percent::"+percent)
         valueChange.start()
     }
     Text {
         id: showPercent
-        text: parseInt(cricleMask.p * 100)
+        text: parseInt(cricleMask.p * 100)+"%"
         anchors.centerIn: parent
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
