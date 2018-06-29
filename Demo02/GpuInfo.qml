@@ -802,23 +802,23 @@ Rectangle {
                         horizontalAlignment: Text.AlignHCenter
                     }
                 }
+//                Rectangle{
+//                    width: 0.2*parent.width
+//                    height: parent.height
+//                    color: "#404244"
+//                    //border.color: "#1A1A1C"
+//                    Text{
+//                        anchors.fill: parent
+//                        text:"硬盘温度"
+//                        font.family: FlatDark.fontFamily
+//                        color:FlatDark.ComboBoxFontColor
+//                        font.pixelSize: FlatDark.mainFontSize
+//                        verticalAlignment: Text.AlignVCenter
+//                        horizontalAlignment: Text.AlignHCenter
+//                    }
+//                }
                 Rectangle{
-                    width: 0.2*parent.width
-                    height: parent.height
-                    color: "#404244"
-                    //border.color: "#1A1A1C"
-                    Text{
-                        anchors.fill: parent
-                        text:"硬盘温度"
-                        font.family: FlatDark.fontFamily
-                        color:FlatDark.ComboBoxFontColor
-                        font.pixelSize: FlatDark.mainFontSize
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
-                Rectangle{
-                    width: 0.5*parent.width
+                    width: 0.7*parent.width
                     height: parent.height
                     color: "#404244"
                     //border.color: "#1A1A1C"
@@ -889,22 +889,22 @@ Rectangle {
                             horizontalAlignment: Text.AlignHCenter
                         }
                     }
-                    Item{
-                        width: 0.2*parent.width
-                        height: parent.height
-                        Text{
-                            anchors.fill: parent
-                            text: temp
-                            font.family: FlatDark.fontFamily
-                            color:"#c0c0c0"
-                            font.pixelSize: FlatDark.mainFontSize
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                        }
-                    }
+//                    Item{
+//                        width: 0.2*parent.width
+//                        height: parent.height
+//                        Text{
+//                            anchors.fill: parent
+//                            text: temp
+//                            font.family: FlatDark.fontFamily
+//                            color:"#c0c0c0"
+//                            font.pixelSize: FlatDark.mainFontSize
+//                            verticalAlignment: Text.AlignVCenter
+//                            horizontalAlignment: Text.AlignHCenter
+//                        }
+//                    }
 
                     Item{
-                        width: 0.5*parent.width
+                        width: 0.7*parent.width
                         height: parent.height
 
 
@@ -1056,7 +1056,7 @@ Rectangle {
             sysModel.append({"icon":"\ue69f",
                                 "name":GetSysInfo.getDiskName(current),
                                 "size":GetSysInfo.getDiskAll(current),
-                                "temp":"50",
+//                                "temp":"50",
                                 "percents":GetSysInfo.getDiskPercent(current)/100.0})
         }
 

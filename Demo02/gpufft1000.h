@@ -32,8 +32,7 @@ public:
 
     QList<double> GpuFFt;
     QList<FFtPoint> fftP[8];
-
-
+    bool isRuning = false;
     //初始化gpu接口 获取gpu数
     void GpuInitm();
     //计算获取GpuFFT

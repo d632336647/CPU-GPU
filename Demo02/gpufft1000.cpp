@@ -3,17 +3,16 @@
 GpuFFT1000::GpuFFT1000(QObject *parent) : QObject(parent)
 {
     GpuInitm();
-    connect(this, SIGNAL(startGet()),this,SLOT(GetData()));
-    QTimer *m_timer;
-    m_timer = new QTimer(this);
+    QTimer *m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(autoKeepSampleTimeOut()));
     m_timer->start(1000*60); //every 1 minutes
 }
 void GpuFFT1000::autoKeepSampleTimeOut()
 {
     QDateTime datetime = QDateTime::currentDateTime();
-    if(datetime.toString("hh:mm") == "10:00")
+    if(datetime.toString("hh:mm") == "11:00")
     {
+        qDebug()<<datetime.toString("hh:mm");
         qmlGetDate();
     }
 }
@@ -31,9 +30,13 @@ void startCalc(GpuFFT1000 *calc)
 }
 void GpuFFT1000::qmlGetDate()
 {
+    if(!isRuning)
+    {
     //创建一个新线程。
+     isRuning= true;
      std::thread getThread(startCalc, this);
      getThread.detach();
+    }
 }
 int GpuFFT1000::getNum()
 {
@@ -68,6 +71,7 @@ void GpuFFT1000::GetData()
         WriteToData();
         return;
     }
+    isRuning = false;
     emit writeDefeated();
 }
 void GpuFFT1000::ReadFromData()
@@ -110,9 +114,11 @@ void GpuFFT1000::ReadFromData()
                     }
                 }
             }
+            isRuning = false;
             emit writeSuccess();
             return;
         }
+        isRuning = false;
         emit writeDefeated();
     }
 }
@@ -217,6 +223,7 @@ double GpuFFT1000::GetGpuFFT(int index)
     if (NULL == pSrc)
     {
         printf("Fail to call Malloc(), for nSignalLen = %d\n", nSignalLen);
+        isRuning = false;
         emit writeDefeated();
         return 1;
     }
@@ -224,6 +231,7 @@ double GpuFFT1000::GetGpuFFT(int index)
     if (NULL == pDst)
     {
         printf("Fail to call Malloc(), for nSignalLen = %d\n", nSignalLen);
+        isRuning = false;
         emit writeDefeated();
         return 1;
     }

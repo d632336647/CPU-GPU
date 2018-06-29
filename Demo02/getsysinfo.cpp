@@ -13,9 +13,6 @@ GetSysInfo::GetSysInfo(QObject *parent) : QObject(parent)
     connect(timerCPU, SIGNAL(timeout()), this, SLOT(GetINFO()));
     timerCPU->start(TIME);
 
-//    gpufft.GetData();
-//    connect(this,&GetSysInfo::--,gpufft,&GpuFFT1000::GetData);
-//    getGpuFFT(gpu_count);
 }
 GetSysInfo::~GetSysInfo()
 {

@@ -20,7 +20,7 @@ Item {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         height: parent.height
-        anchors.left: pannel.right
+        anchors.right: pannel.left
         font.family: FlatDark.fontFamily
         width: 20
         z:1
@@ -31,7 +31,7 @@ Item {
         width: parent.width-20
         height: parent.height-iw
         anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
+        anchors.right:  parent.right
 //        anchors.topMargin: iw
 //        anchors.leftMargin: iw
 //        anchors.bottomMargin: iw

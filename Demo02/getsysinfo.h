@@ -43,7 +43,6 @@ public:
     //GPU
     void GpuInitm();
     int GetGpuUsedTotal();
-    GpuFFT1000 gpufft;
     QList<int> GpuFFt;
     unsigned int gpu_count = 0;
     //Temp
