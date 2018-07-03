@@ -26,7 +26,7 @@ Rectangle {
 //        anchors.bottom: systemStatusBox.bottom
 //        anchors.bottomMargin: 4
         height: cpuGpuRamBox.cGpuProportion*parent.height
-        width: 0.27*parent.width
+        width:  parent.width < 1360 ? 0.27*parent.width:0.23*parent.width
         clip:true
         color: "black"
         //border.color: "#808080"

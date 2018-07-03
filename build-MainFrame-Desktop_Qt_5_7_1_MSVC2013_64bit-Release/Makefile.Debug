@@ -339,6 +339,12 @@ debug\moc_getsysinfo.cpp: ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QOb
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QTextStream \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QDateTime \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qdatetime.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonDocument \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsondocument.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonvalue.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonObject \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonobject.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonValue \
 		..\Demo02\getsysinfo.h \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\bin\moc.exe
 	D:\Qt\Qt5.7.1\5.7\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/mkspecs/win32-msvc2013 -ID:/work/Demo02_20180606/Demo02 -ID:/work/Demo02_20180606/Demo02/LIB/NVML -ID:/work/Demo02_20180606/Demo02/LIB/GpuFFTdll_v8.0 -ID:/work/Demo02_20180606/Demo02/thrift/include -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtCharts -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtWidgets -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtQuick -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtGui -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtANGLE -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtQml -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtNetwork -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtCore -I. ..\Demo02\getsysinfo.h -o debug\moc_getsysinfo.cpp
@@ -418,6 +424,12 @@ debug\moc_gpufft1000.cpp: ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QOb
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qbasictimer.h \
 		..\Demo02\LIB\NVML\nvml.h \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QDebug \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonDocument \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsondocument.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonvalue.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonObject \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonobject.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonValue \
 		..\Demo02\gpufft1000.h \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\bin\moc.exe
 	D:\Qt\Qt5.7.1\5.7\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/mkspecs/win32-msvc2013 -ID:/work/Demo02_20180606/Demo02 -ID:/work/Demo02_20180606/Demo02/LIB/NVML -ID:/work/Demo02_20180606/Demo02/LIB/GpuFFTdll_v8.0 -ID:/work/Demo02_20180606/Demo02/thrift/include -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtCharts -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtWidgets -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtQuick -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtGui -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtANGLE -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtQml -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtNetwork -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtCore -I. ..\Demo02\gpufft1000.h -o debug\moc_gpufft1000.cpp
@@ -508,6 +520,12 @@ debug\moc_thriftlocal.cpp: ..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QO
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QTextStream \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QDateTime \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qdatetime.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonDocument \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsondocument.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonvalue.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonObject \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonobject.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonValue \
 		..\Demo02\thrift\src\thriftlocal.h \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\bin\moc.exe
 	D:\Qt\Qt5.7.1\5.7\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/mkspecs/win32-msvc2013 -ID:/work/Demo02_20180606/Demo02 -ID:/work/Demo02_20180606/Demo02/LIB/NVML -ID:/work/Demo02_20180606/Demo02/LIB/GpuFFTdll_v8.0 -ID:/work/Demo02_20180606/Demo02/thrift/include -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtCharts -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtWidgets -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtQuick -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtGui -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtANGLE -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtQml -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtNetwork -ID:/Qt/Qt5.7.1/5.7/msvc2013_64/include/QtCore -I. ..\Demo02\thrift\src\thriftlocal.h -o debug\moc_thriftlocal.cpp
@@ -944,7 +962,13 @@ debug\getsysinfo.obj: ..\Demo02\getsysinfo.cpp ../Demo02/getsysinfo.h \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QFile \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QTextStream \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QDateTime \
-		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qdatetime.h
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qdatetime.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonDocument \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsondocument.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonvalue.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonObject \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonobject.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonValue
 
 debug\gpufft1000.obj: ..\Demo02\gpufft1000.cpp ../Demo02/gpufft1000.h \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QObject \
@@ -1021,7 +1045,13 @@ debug\gpufft1000.obj: ..\Demo02\gpufft1000.cpp ../Demo02/gpufft1000.h \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qtimer.h \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qbasictimer.h \
 		..\Demo02\LIB\NVML\nvml.h \
-		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QDebug
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QDebug \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonDocument \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsondocument.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonvalue.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonObject \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonobject.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonValue
 
 debug\Collect.obj: ..\Demo02\thrift\src\Collect.cpp ../Demo02/thrift/src/Collect.h \
 		..\Demo02\thrift\include\thrift\transport\TBufferTransports.h \
@@ -3656,7 +3686,13 @@ debug\server.obj: ..\Demo02\thrift\src\server.cpp ../Demo02/thrift/src/Collect.h
 		..\Demo02\LIB\GpuFFTdll_v8.0\gpuFFT.h \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QTextStream \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QDateTime \
-		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qdatetime.h
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qdatetime.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonDocument \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsondocument.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonvalue.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonObject \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonobject.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonValue
 
 debug\thriftlocal.obj: ..\Demo02\thrift\src\thriftlocal.cpp ../Demo02/thrift/src/thriftlocal.h \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QObject \
@@ -3744,7 +3780,13 @@ debug\thriftlocal.obj: ..\Demo02\thrift\src\thriftlocal.cpp ../Demo02/thrift/src
 		..\Demo02\LIB\GpuFFTdll_v8.0\gpuFFT.h \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QTextStream \
 		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QDateTime \
-		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qdatetime.h
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qdatetime.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonDocument \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsondocument.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonvalue.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonObject \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\qjsonobject.h \
+		..\..\..\Qt\Qt5.7.1\5.7\msvc2013_64\include\QtCore\QJsonValue
 
 debug\qrc_qml.obj: debug\qrc_qml.cpp 
 

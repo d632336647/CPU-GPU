@@ -14,6 +14,10 @@
 #include <QDebug>
 #include <thread>
 
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+
 struct FFtPoint
 {
     QString time;
@@ -37,6 +41,8 @@ public:
     void GpuInitm();
     //计算获取GpuFFT
     double GetGpuFFT(int index);
+    QString planTime = "10:00";
+    QString readJsonTime();
 
     QStringList   WriteToData();
 

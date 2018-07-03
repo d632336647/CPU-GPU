@@ -2,20 +2,42 @@
 
 GpuFFT1000::GpuFFT1000(QObject *parent) : QObject(parent)
 {
+    //初始化 获取GPU核心数
     GpuInitm();
+    //从json获取定时统计的计划时间
+    planTime = readJsonTime() != ""? readJsonTime() : "10:00";
+    //定时器 60s触发一次
     QTimer *m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(autoKeepSampleTimeOut()));
     m_timer->start(1000*60); //every 1 minutes
 }
+//对比当前是否为定时时间
 void GpuFFT1000::autoKeepSampleTimeOut()
 {
     QDateTime datetime = QDateTime::currentDateTime();
-    if(datetime.toString("hh:mm") == "11:00")
+    planTime = readJsonTime() != ""? readJsonTime() : "10:00";
+    if(datetime.toString("hh:mm") == planTime)
     {
         qDebug()<<datetime.toString("hh:mm");
         qmlGetDate();
     }
 }
+//读取json
+QString GpuFFT1000::readJsonTime()
+   {
+      QString val;
+      QFile file("default.json");
+      file.open(QIODevice::ReadOnly | QIODevice::Text);
+      val = file.readAll();
+      file.close();
+      QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
+      QJsonObject sett2 = d.object();
+      QJsonValue value = sett2.value("time");
+//      qDebug()<< "value::::"<<value.toString();
+
+      return value.toString();
+   }
+
 //GPU Init ---- To Get Gpu Count
 void GpuFFT1000::GpuInitm()
 {
@@ -28,6 +50,7 @@ void startCalc(GpuFFT1000 *calc)
 {
     calc->GetData();//计算-写入文件-读取文件至表列-发送writeSuccess writeDefeated 信号
 }
+//qml及定时器的响应函数 计算的开始
 void GpuFFT1000::qmlGetDate()
 {
     if(!isRuning)
