@@ -25,6 +25,7 @@ void GpuFFT1000::autoKeepSampleTimeOut()
 //读取json
 QString GpuFFT1000::readJsonTime()
    {
+    //qDebug()<<QDateTime::currentDateTime().toString("hh::mm::ss::zzz");
       QString val;
       QFile file("default.json");
       file.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -33,8 +34,7 @@ QString GpuFFT1000::readJsonTime()
       QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
       QJsonObject sett2 = d.object();
       QJsonValue value = sett2.value("time");
-//      qDebug()<< "value::::"<<value.toString();
-
+      //qDebug()<< "value::::"<<value.toString();
       return value.toString();
    }
 

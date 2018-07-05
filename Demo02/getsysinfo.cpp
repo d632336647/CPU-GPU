@@ -120,6 +120,7 @@ int GetSysInfo::GetGpuUsedTotal()
     }
 
     result = nvmlDeviceGetCount(&device_count);
+    qDebug()<<"QString::number(device_count):"<<QString::number(device_count);
     if (NVML_SUCCESS != result)
     {
         errorInfoStr = "Failed to query device count: %s\n" + QString (nvmlErrorString(result));
@@ -145,34 +146,53 @@ int GetSysInfo::GetGpuUsedTotal()
         result = nvmlDeviceGetUtilizationRates(device, &utilization);
         if (NVML_SUCCESS != result)
         {
-            //qDebug()<<"device " <<QString::number(1) <<" nvmlDeviceGetUtilizationRates Failed : " <<QString::number(result) << "-" << nvmlErrorString(result);
+            errorInfoStr = "device" + QString::number(i) + "Nvml get gpu use failed " + QString(nvmlErrorString(result));
+            qDebug()<< errorInfoStr;
             return 1;
         }
-        else
+        //printf("----- 使用率 ----- \n");
+        //qDebug()<<"GPU" <<QString::number(i) << "使用率："  <<QString::number(utilization.gpu);
+        GPUInfoStr.append(findoutGPUinfoStr);
+        gpuPercent = QString::number(utilization.gpu);
+
+//            //qDebug()<<"显存使用率：" <<QString::number(utilization.memory);
+//            GPUInfoStr.append(findoutGPUinfoStr);
+//            gpuCaChe = QString::number(utilization.memory);
+        // 获取显存使用信息
+        nvmlMemory_t memory;
+        result = nvmlDeviceGetMemoryInfo(device, &memory);
+        if (result != NVML_SUCCESS)
         {
-            //printf("----- 使用率 ----- \n");
-            //qDebug()<<"GPU" <<QString::number(i) << "使用率："  <<QString::number(utilization.gpu);
-            GPUInfoStr.append(findoutGPUinfoStr);
-            gpuPercent = QString::number(utilization.gpu);
-
-            //qDebug()<<"显存使用率：" <<QString::number(utilization.memory);
-            GPUInfoStr.append(findoutGPUinfoStr);
-            gpuCaChe = QString::number(utilization.memory);
-
-            //依次加入链表
-            ListGpuInfo gpuListItem;
-            gpuListItem = {gpuPercent,gpuCaChe};
-            GpuInfoList.append(gpuListItem);
+            errorInfoStr = "device " + QString::number(i) + "nvml get gpu memory failed "+ QString(nvmlErrorString(result));
+            return 1;
         }
+        gpuCaChe = QString::number((int)(((double)memory.used/(double)memory.total)*100));
+        //依次加入链表
+        ListGpuInfo gpuListItem;
+        gpuListItem = {gpuPercent,gpuCaChe};
+        GpuInfoList.append(gpuListItem);
+
+//        // 获取实时器件温度
+//        unsigned int temperature_temp;
+//        result = nvmlDeviceGetTemperature(device, NVML_TEMPERATURE_GPU, &temperature_temp);
+//        if (result != NVML_SUCCESS)
+//        {
+//            errorInfoStr = "nvml获取设备温度失败！！\n";
+//            return 1;
+//        }
+//        qDebug()<<"temperature_temp:"<<temperature_temp;
+
     }
 
     result = nvmlShutdown();
     if (NVML_SUCCESS != result)
     {
         errorInfoStr = "Failed to shutdown NVML:" +QString(nvmlErrorString(result));
+//        qDebug()<<errorInfoStr;
         return 1;
     }
     errorInfoStr = "";
+//    qDebug()<<errorInfoStr;
     return 0;
 
 //Error:
